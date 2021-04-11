@@ -6,7 +6,7 @@ namespace Game_project
     {
         static void Main()
         {
-            
+            var test = 1;
         }
     }
 }
