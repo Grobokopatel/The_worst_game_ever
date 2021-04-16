@@ -96,13 +96,11 @@ namespace GameModel
 
         public double GetPositionAfterMovement(double currentPosition, double nextPosition)
         {
-            var lastBarrierCord = default(double);
+            var greaterCord = Math.Max(currentPosition, nextPosition);
+            var lesserCord = Math.Min(currentPosition, nextPosition);
 
-            return currentSubWorld.Barriers.Any(barrierCord =>
-            {
-                lastBarrierCord = barrierCord;
-                return (currentPosition <= barrierCord && barrierCord < nextPosition) || (currentPosition >= barrierCord && barrierCord > nextPosition);
-            }) ? lastBarrierCord : nextPosition;
+            return currentSubWorld.Barriers.Any(barrierCord => lesserCord <= barrierCord && barrierCord <= greaterCord)
+                ? currentPosition : nextPosition;
         }
 
         public void Move(Directions direction)
