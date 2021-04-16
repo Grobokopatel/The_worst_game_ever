@@ -71,7 +71,7 @@ namespace GameModel
             return tools.Contains((int)tool);
         }
 
-        public void ChangeAmountOfResource(Resources item, int deltaAmount)
+        public void AddDeltaResources(Resources item, int deltaAmount)
         {
             var itemId = (int)item;
             if (resources.ContainsKey(itemId))
@@ -90,7 +90,7 @@ namespace GameModel
             if (resources.ContainsKey(itemId))
                 return resources[itemId];
 
-            ChangeAmountOfResource(item, 0);
+            AddDeltaResources(item, 0);
             return 0;
         }
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameModel
 {
-    class House : IInteractable
+    public class House : IInteractable
     {
         public House(double position)
         {
@@ -18,7 +18,7 @@ namespace GameModel
 
         public void Interact(Player player)
         {
-            //Меняет SubWorld игрока
+            //Меняет currentSubWorld игрока
             throw new NotImplementedException();
         }
     }
