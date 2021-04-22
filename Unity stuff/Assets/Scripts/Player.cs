@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
             Move();
     }
 
-    public void Move()
+    private void Move()
     {
         var deltaMovement = transform.right * Input.GetAxis("Horizontal");
         var collidersAmount = GetCollidersInPosition(transform.position + deltaMovement.normalized * 0.5F + transform.up * (-0.5F)).Length;
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement, speed * Time.deltaTime);
     }
 
-    public Collider2D[] GetCollidersInPosition(Vector3 position)
+    private Collider2D[] GetCollidersInPosition(Vector3 position)
     {
         return Physics2D.OverlapCircleAll(position, 0.1F);
     }
