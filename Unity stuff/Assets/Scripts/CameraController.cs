@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     private Transform target;
-    
+
     private void Awake()
     {
         if (!target)
@@ -18,6 +18,6 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position + transform.forward * (-10) + transform.up, speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, target.position + transform.forward * (-10) + transform.up * 1.4F, speed * Time.deltaTime);
     }
 }
