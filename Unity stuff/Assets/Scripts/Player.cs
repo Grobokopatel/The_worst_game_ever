@@ -52,15 +52,11 @@ public class Player : MonoBehaviour
     public void Move()
     {
         var deltaMovement = transform.right * Input.GetAxis("Horizontal");
-        var debugVector = transform.position + deltaMovement * 0.5F + transform.up * (-0.5F);
-        var collidersAmount = GetCollidersInPosition(transform.position + deltaMovement * 0.5F + transform.up*(-0.5F)).Length;
-        Debug.Log($"x={debugVector.x}, y={debugVector.y}, amount={collidersAmount}");
+        var collidersAmount = GetCollidersInPosition(transform.position + deltaMovement.normalized * 0.5F + transform.up * (-0.5F)).Length;
 
+        sprite.flipX = deltaMovement.x < 0;
         if (collidersAmount >= 1)
-        {
             transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement, speed * Time.deltaTime);
-            sprite.flipX = deltaMovement.x < 0;
-        }
     }
 
     public Collider2D[] GetCollidersInPosition(Vector3 position)
