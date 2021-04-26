@@ -9,14 +9,15 @@ public class Tree : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D otherCollider)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        var player = otherCollider.GetComponent<Player>();
+        var player = collision.GetComponent<Player>();
 
         if (player)
         {
             player.AddDeltaResources(InGameResources.Log, 1);
             Destroy(gameObject);
+            player.CurrentInteractable = null;
             Debug.Log($"Количество брёвен в инвентаре: {player.GetAmountOfResource(InGameResources.Log)}");
         }
     }

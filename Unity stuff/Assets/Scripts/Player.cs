@@ -34,10 +34,15 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer sprite;
+
+    InteractableObject currentInteractable;
     public InteractableObject CurrentInteractable
     {
-        get;
-        set;
+        get => currentInteractable;
+        set
+        {
+            currentInteractable = value;
+        }
     }
     
     private void Awake()
@@ -45,7 +50,6 @@ public class Player : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
-        CurrentInteractable = null;
     }
 
     private void Update()
@@ -61,7 +65,6 @@ public class Player : MonoBehaviour
     {
         var deltaMovement = transform.right * Input.GetAxis("Horizontal");
         var collidersAmount = GetCollidersInPosition(transform.position + deltaMovement.normalized * 0.5F + transform.up * (-0.5F)).Length;
-
         sprite.flipX = deltaMovement.x < 0;
         if (collidersAmount >= 1)
             transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement, speed * Time.deltaTime);
