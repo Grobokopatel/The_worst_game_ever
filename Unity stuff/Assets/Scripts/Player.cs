@@ -15,7 +15,7 @@ public enum Tools
 
 public enum InGameResources
 {
-    Wood = 0,
+    Log = 0,
     Stone = 1,
     Fish = 2,
 }
@@ -34,17 +34,25 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer sprite;
-
-
+    public InteractableObject CurrentInteractable
+    {
+        get;
+        set;
+    }
+    
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        CurrentInteractable = null;
     }
 
     private void Update()
     {
+        if (CurrentInteractable != null && Input.GetKeyDown(KeyCode.E))
+            CurrentInteractable.Interact(this);
+
         if (Input.GetButton("Horizontal"))
             Move();
     }

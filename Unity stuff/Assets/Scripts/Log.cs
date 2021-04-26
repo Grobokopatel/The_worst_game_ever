@@ -1,16 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Log : MonoBehaviour
+public class Log : InteractableObject
 {
-    private void OnTriggerEnter2D(Collider2D otherCollider)
+    public override void Interact(Player player)
     {
-        var player = otherCollider.GetComponent<Player>();
-
-        if (player)
-        {
-            player.AddDeltaResources(InGameResources.Wood, 1);
-            Destroy(gameObject);
-            Debug.Log($"Количество брёвен в инвентаре: {player.GetAmountOfResource(InGameResources.Wood)}");
-        }
+        player.AddDeltaResources(InGameResources.Log, 1);
+        Destroy(gameObject);
+        Debug.Log($"Количество брёвен в инвентаре: {player.GetAmountOfResource(InGameResources.Log)}");
     }
 }
