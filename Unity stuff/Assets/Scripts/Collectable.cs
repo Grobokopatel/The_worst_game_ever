@@ -6,9 +6,9 @@ public class Collectable : InteractableObject
     public override void Interact(Player player)
     {
         var resource =
-            (InGameResources) Enum.Parse(typeof(InGameResources), gameObject.name.Replace("(Clone)", "").Split()[0]);
+            (InGameResources)Enum.Parse(typeof(InGameResources), gameObject.name.Replace("(Clone)", "").Split()[0]);
         player.AddDeltaResources(resource, 1);
         Destroy(gameObject);
-        Debug.Log($"РљРѕР»РёС‡РµСЃС‚РІРѕ {resource.ToString()} РІ РёРЅРІРµРЅС‚Р°СЂРµ: {player.GetAmountOfResource(resource)}");
+        Debug.Log($"Количество {resource.ToString()} в инвентаре: {player.GetAmountOfResource(resource)}");
     }
 }
