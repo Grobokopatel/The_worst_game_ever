@@ -20,6 +20,7 @@ public enum InGameResources
     Fish = 2,
 }
 
+
 public enum Directions
 {
     Left = -1,
