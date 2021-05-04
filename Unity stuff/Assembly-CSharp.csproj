@@ -62,7 +62,8 @@
     <Compile Include="Assets\Scripts\ObjectsLinks.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\Destructible.cs" />
-    <Compile Include="Assets\Scripts\Circle.cs" />
+    <Compile Include="Assets\Scripts\DebugCircle.cs" />
+    <Compile Include="Assets\Scripts\Enums.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -4,28 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum Tools
-{
-    Shovel = 0,
-    Axe = 1,
-    Pickaxe = 2,
-    Bomb = 3,
-    Saw = 4
-}
 
-public enum InGameResources
-{
-    Log = 0,
-    Stone = 1,
-    Fish = 2,
-}
-
-
-public enum Directions
-{
-    Left = -1,
-    Right = 1,
-}
 
 public class Player : MonoBehaviour
 {
@@ -36,6 +15,15 @@ public class Player : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sprite;
 
+    private PlayerState State
+    {
+        get => (PlayerState)animator.GetInteger("State");
+        set
+        {
+            animator.SetInteger("State", (int)value);
+        }
+    }
+
     InteractableObject currentInteractable;
     public InteractableObject CurrentInteractable
     {
@@ -45,7 +33,7 @@ public class Player : MonoBehaviour
             currentInteractable = value;
         }
     }
-    
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -55,6 +43,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        State = PlayerState.Idle;
         if (CurrentInteractable != null && Input.GetKeyDown(KeyCode.E))
             CurrentInteractable.Interact(this);
 
@@ -64,6 +53,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
+        State = PlayerState.Run;
         var deltaMovement = transform.right * Input.GetAxis("Horizontal");
         var collidersAmount = GetCollidersInPosition(transform.position + deltaMovement.normalized * 0.5F + transform.up * (-0.5F)).Length;
         sprite.flipX = deltaMovement.x < 0;
