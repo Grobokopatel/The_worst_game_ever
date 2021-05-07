@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        offsetVector = transform.forward * (-13F) + transform.up * 1.3F;
+        offsetVector = transform.forward * (-10F) + transform.up * 2F;
         if (!target)
             target = FindObjectOfType<Player>().transform;
     }
