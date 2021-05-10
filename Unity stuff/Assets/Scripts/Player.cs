@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer sprite;
+    public static Player player;
 
     private PlayerState State
     {
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    InteractableObject currentInteractable;
+    private InteractableObject currentInteractable;
     public InteractableObject CurrentInteractable
     {
         get => currentInteractable;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        player = this;
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -66,50 +68,22 @@ public class Player : MonoBehaviour
         return Physics2D.OverlapCircleAll(position, 0.1F);
     }
 
-    private readonly HashSet<int> tools = new HashSet<int>();
+    private readonly Dictionary<Item, int> inventory = new Dictionary<Item, int>();
 
-    private readonly Dictionary<int, int> resources = new Dictionary<int, int>();
-
-    private float currentPosition;
-    public float CurrentPosition
+    public void AddDeltaItems(Item item, int deltaAmount)
     {
-        get => currentPosition;
-        private set
-        {
-            currentPosition = value;
-        }
-    }
-
-    public void AddTool(Tools tool)
-    {
-        tools.Add((int)tool);
-    }
-
-    public bool HasTool(Tools tool)
-    {
-        return tools.Contains((int)tool);
-    }
-
-    public void AddDeltaResources(InGameResources item, int deltaAmount)
-    {
-        var itemId = (int)item;
-        if (resources.ContainsKey(itemId))
-            resources[itemId] += deltaAmount;
+        if (inventory.ContainsKey(item))
+            inventory[item] += deltaAmount;
         else
-        {
-            if (deltaAmount < 0)
-                throw new InvalidOperationException();
-            resources[itemId] = deltaAmount;
-        }
+            inventory[item] = deltaAmount;
     }
 
-    public int GetAmountOfResource(InGameResources item)
+    public int GetAmountOfItem(Item item)
     {
-        var itemId = (int)item;
-        if (resources.ContainsKey(itemId))
-            return resources[itemId];
+        if (inventory.ContainsKey(item))
+            return inventory[item];
 
-        AddDeltaResources(item, 0);
+        AddDeltaItems(item, 0);
         return 0;
     }
 
@@ -121,11 +95,4 @@ public class Player : MonoBehaviour
     //    return currentSubWorld.Barriers.Any(barrierCord => lesserCord <= barrierCord && barrierCord <= greaterCord)
     //        ? currentPosition : nextPosition;
     //}
-
-
-
-    public void TeleportTo(float coord)
-    {
-        currentPosition = coord;
-    }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Destructible : InteractableObject
 {
-    public GameObject toSpawn;
+    [SerializeField]
+    private GameObject toSpawn;
 
     public override void Interact(Player player)
     {

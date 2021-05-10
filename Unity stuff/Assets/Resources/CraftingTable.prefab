@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3229645843708065115}
   - component: {fileID: 5634745837235687422}
+  - component: {fileID: 1417087064}
   m_Layer: 0
   m_Name: CraftingTable
   m_TagString: Untagged
@@ -45,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.6324632, y: -0.348509}
+  m_Offset: {x: -0.09324908, y: -0.10874677}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,8 +57,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4934764, y: 0.50313056}
+  m_Size: {x: 0.7892976, y: 0.95910025}
   m_EdgeRadius: 0
+--- !u!114 &1417087064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319311301284318810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68fd18d92d0a8794cbf1019c7844b10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  craftingMenu: {fileID: 0}
+  cameraController: {fileID: 0}
 --- !u!1 &2372220487411506013
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,7 +84,7 @@ GameObject:
   - component: {fileID: 2477945444971426125}
   - component: {fileID: 1894793133748749239}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,8 +98,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2372220487411506013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.632, y: -0.348, z: 13.502359}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -0.0942, y: -0.1106, z: 0}
+  m_LocalScale: {x: 0.81148595, y: 0.81148595, z: 0.81148595}
   m_Children: []
   m_Father: {fileID: 3229645843708065115}
   m_RootOrder: 0
@@ -129,8 +144,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.4245283, g: 0.31498903, b: 0.038047336, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 8d4dea46f68f68a49a5c46381da5b275, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

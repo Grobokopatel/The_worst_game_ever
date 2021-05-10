@@ -6,6 +6,7 @@ using UnityEngine.Video;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController cameraController;
     [SerializeField]
     private VideoPlayer intro;
 
@@ -17,36 +18,30 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Transform target;
 
-    private Vector3 offsetVector;
+    [SerializeField]
+    private float yOffset;
+    private float zOffset = -10F;
+    private float xOffset;
 
-    private void Start()
+    public float XOffset
     {
-        /*intro.isLooping = false;
-        intro.Play();*/
-    }
-
-    private void OnGUI()
-    {
-        /*if (isIntroPlaying)
+        get => xOffset;
+        set
         {
-            if (!intro.isPlaying)
-            {
-                SceneManager.LoadScene(1);
-                isIntroPlaying = false;
-            }
-        }*/
+            xOffset = value;
+        }
     }
-
 
     private void Awake()
     {
-        offsetVector = transform.forward * (-10F) + transform.up * 2F;
         if (!target)
             target = FindObjectOfType<Player>().transform;
+        cameraController = this;
     }
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position + offsetVector, speed * Time.deltaTime);
+        var offSetVector = new Vector3(xOffset, yOffset, zOffset);
+        transform.position = Vector3.Lerp(transform.position, target.position + offSetVector, speed * Time.deltaTime);
     }
 }
