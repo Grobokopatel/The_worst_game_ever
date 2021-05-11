@@ -66,9 +66,11 @@
     <Compile Include="Assets\Scripts\GameItems\Collectable.cs" />
     <Compile Include="Assets\Scripts\GameItems\Destructible.cs" />
     <Compile Include="Assets\Scripts\GameItems\DebugCircle.cs" />
-    <Compile Include="Assets\Scripts\GameItems\CraftingTable.cs" />
     <Compile Include="Assets\Scripts\CraftingMenu.cs" />
+    <Compile Include="Assets\Scripts\GameItems\CraftingTable.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\CraftButton.cs" />
+    <Compile Include="Assets\Scripts\Boat.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -13,5 +13,6 @@ public enum Direction
 public enum PlayerState
 {
     Idle = 0,
-    Run = 1
+    Run = 1,
+    InBoat = 2,
 }

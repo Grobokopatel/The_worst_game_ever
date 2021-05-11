@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3018881235337805834}
   - component: {fileID: 3018881235337805835}
   - component: {fileID: 1898998200268695207}
+  - component: {fileID: 911019751151291465}
   m_Layer: 5
   m_Name: Craft
   m_TagString: Untagged
@@ -166,13 +167,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 911019751151291465}
+        m_TargetAssemblyTypeName: CraftButton, Assembly-CSharp
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -191,6 +192,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+--- !u!114 &911019751151291465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018881235337805877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e28e03c2810b549be8ea5c91c84320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3018881235483155340
 GameObject:
   m_ObjectHideFlags: 0

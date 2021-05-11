@@ -12,6 +12,7 @@ public class CraftingTable : InteractableObject
     public override void Interact(Player player)
     {
         craftingMenu.SetActive(true);
+        CraftingMenu.craftingMenu.UpdateItemsAmount();
         Player.player.enabled = false;
         cameraController.XOffset = 3.5F;
         /*GetComponent<FirstPersonController>().enabled = !canvas.active;

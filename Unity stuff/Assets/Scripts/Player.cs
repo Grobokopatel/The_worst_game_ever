@@ -16,7 +16,9 @@ public class Player : MonoBehaviour
     private SpriteRenderer sprite;
     public static Player player;
 
-    private PlayerState State
+    [SerializeField]
+    private GameObject boat;
+    public PlayerState State
     {
         get => (PlayerState)animator.GetInteger("State");
         set
@@ -45,12 +47,35 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        State = PlayerState.Idle;
+        if (player.State != PlayerState.InBoat)
+            State = PlayerState.Idle;
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.E) && GetCollidersInPosition(transform.position + 1.5F * transform.up).Length >= 1)
+            {
+                Instantiate(boat, transform.position, transform.rotation);
+                player.transform.position += 1.5F * transform.up;
+                player.State = PlayerState.Idle;
+            }
+        }
+
         if (CurrentInteractable != null && Input.GetKeyDown(KeyCode.E))
             CurrentInteractable.Interact(this);
 
         if (Input.GetButton("Horizontal"))
-            Move();
+        {
+            if (State == PlayerState.InBoat)
+                Swim();
+            else
+                Move();
+        }
+    }
+
+    private void Swim()
+    {
+        var deltaMovement = transform.right * Input.GetAxis("Horizontal");
+        sprite.flipX = deltaMovement.x < 0;
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement, speed * Time.deltaTime);
     }
 
     private void Move()
