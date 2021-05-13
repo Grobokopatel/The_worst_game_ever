@@ -17,6 +17,8 @@ public struct ItemAmount
     public int Amount => amount;
 }
 
+
+
 [CreateAssetMenu]
 public class CraftingRecipe : ScriptableObject
 {

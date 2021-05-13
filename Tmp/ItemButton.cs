@@ -10,8 +10,6 @@ public class ItemButton : MonoBehaviour
     public Text name;
     public Transform subHolder;
 
-
-
     public void Craft()
     {
         var inv = FindObjectOfType<Inventory>();

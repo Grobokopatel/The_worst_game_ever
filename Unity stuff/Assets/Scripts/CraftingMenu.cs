@@ -24,19 +24,9 @@ public class CraftingMenu : MonoBehaviour
 
     public static CraftingMenu craftingMenu;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            gameObject.SetActive(false);
-            Player.player.enabled = true;
-            cameraController.XOffset = 0;
-        }
-    }
-
     public void UpdateItemsAmount()
     {
-        foreach(var material in allMaterials)
+        foreach (var material in allMaterials)
         {
             material.Item1.text = $"{Player.player.GetAmountOfItem(material.Item2)}/{material.Item1.text.Split('/')[1]}";
         }
@@ -45,7 +35,7 @@ public class CraftingMenu : MonoBehaviour
     private void Awake()
     {
         craftingMenu = this;
-        var craftingRecipes = Resources.LoadAll<CraftingRecipe>("Crafting Recipes");
+        var craftingRecipes = Resources.LoadAll<CraftingRecipe>("Prefabs/Crafting recipes");
         foreach (var craftingRecipe in craftingRecipes)
         {
             var craft = Instantiate(craftPrefab, craftHolder.transform);
@@ -63,5 +53,6 @@ public class CraftingMenu : MonoBehaviour
                 material.GetComponentInChildren<Text>(true).text = $"0/{craftingRecipeMaterial.Amount}";
             }
         }
+        Debug.Log("Инициализация меню крафта");
     }
 }

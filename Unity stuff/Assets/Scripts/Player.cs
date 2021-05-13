@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sprite;
     public static Player player;
+    public const float ConstantYPosition = -6.283F;
 
     [SerializeField]
     private GameObject boat;
@@ -49,14 +50,13 @@ public class Player : MonoBehaviour
     {
         if (player.State != PlayerState.InBoat)
             State = PlayerState.Idle;
-        else
+        else if (Input.GetKeyDown(KeyCode.E) && GetCollidersInPosition(transform.position + 1F * transform.up).Length >= 1)
         {
-            if (Input.GetKeyDown(KeyCode.E) && GetCollidersInPosition(transform.position + 1.5F * transform.up).Length >= 1)
-            {
-                Instantiate(boat, transform.position, transform.rotation);
-                player.transform.position += 1.5F * transform.up;
-                player.State = PlayerState.Idle;
-            }
+            Instantiate(boat, transform.position, transform.rotation);
+            var newPosition = player.transform.position;
+            newPosition.y = ConstantYPosition;
+            transform.position = newPosition;
+            player.State = PlayerState.Idle;
         }
 
         if (CurrentInteractable != null && Input.GetKeyDown(KeyCode.E))
@@ -82,13 +82,13 @@ public class Player : MonoBehaviour
     {
         State = PlayerState.Run;
         var deltaMovement = transform.right * Input.GetAxis("Horizontal");
-        var collidersAmount = GetCollidersInPosition(transform.position + deltaMovement.normalized * 0.5F + transform.up * (-0.5F)).Length;
+        var collidersAmount = GetCollidersInPosition(transform.position + 0.5F * deltaMovement.normalized + (-0.5F) * transform.up).Length;
         sprite.flipX = deltaMovement.x < 0;
         if (collidersAmount >= 1)
             transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement, speed * Time.deltaTime);
     }
 
-    private Collider2D[] GetCollidersInPosition(Vector3 position)
+    public static Collider2D[] GetCollidersInPosition(Vector3 position)
     {
         return Physics2D.OverlapCircleAll(position, 0.1F);
     }

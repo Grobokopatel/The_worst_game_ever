@@ -10,7 +10,6 @@ public class CraftButton : MonoBehaviour
         get;
         set;
     }    
-        
 
     public void OnClick()
     {
@@ -19,8 +18,8 @@ public class CraftButton : MonoBehaviour
         {
             Debug.Log($"Ты скрафтил {ThisButtonRecipe.Results[0].Item.ItemName}");
             ThisButtonRecipe.Craft(player);
-            Debug.Log($"Количество брёвен после крафта {player.GetAmountOfItem(Resources.Load<Item>("Inventory Items/Log"))}");
-            Debug.Log($"Количество камней после крафта {player.GetAmountOfItem(Resources.Load<Item>("Inventory Items/Stone"))}");
+            Debug.Log($"Количество брёвен после крафта {Resources.Load<Item>("Prefabs/Inventory Items/Log")}");
+            Debug.Log($"Количество камней после крафта {Resources.Load<Item>("Prefabs/Inventory Items/Stone")}");
             CraftingMenu.craftingMenu.UpdateItemsAmount();
         }
         else

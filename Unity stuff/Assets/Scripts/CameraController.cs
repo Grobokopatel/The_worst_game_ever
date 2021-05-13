@@ -41,7 +41,10 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        var offSetVector = new Vector3(xOffset, yOffset, zOffset);
-        transform.position = Vector3.Lerp(transform.position, target.position + offSetVector, speed * Time.deltaTime);
+        var offsetVector = new Vector3(xOffset, yOffset, zOffset);
+        var offsettedTarget = target.position + offsetVector;
+        offsettedTarget.y = -4.982996F;
+
+        transform.position = Vector3.Lerp(transform.position, offsettedTarget, speed * Time.deltaTime);
     }
 }

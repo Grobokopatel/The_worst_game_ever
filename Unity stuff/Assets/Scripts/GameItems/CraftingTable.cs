@@ -15,6 +15,8 @@ public class CraftingTable : InteractableObject
         CraftingMenu.craftingMenu.UpdateItemsAmount();
         Player.player.enabled = false;
         cameraController.XOffset = 3.5F;
+        enabled = true;
+        #region
         /*GetComponent<FirstPersonController>().enabled = !canvas.active;
         if (canvas.active)
         {
@@ -30,5 +32,17 @@ public class CraftingTable : InteractableObject
                 AddItem1(GlobalItemsList.gl.allItem1sList[i].Clone());
             }
         }*/
+        #endregion
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CraftingMenu.craftingMenu.gameObject.SetActive(false);
+            Player.player.enabled = true;
+            cameraController.XOffset = 0;
+            enabled = false;
+        }
     }
 }

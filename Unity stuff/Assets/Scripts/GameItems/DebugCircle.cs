@@ -19,6 +19,6 @@ public class DebugCircle : MonoBehaviour
 
     private void Move()
     {
-        transform.position = player.transform.position + transform.right * (Input.GetAxis("Horizontal") < 0 ? -1 : 1) * 0.5F + transform.up * (-0.5F);
+        transform.position = player.transform.position + 0.5F * (Input.GetAxis("Horizontal") < 0 ? -1 : 1) * transform.right + (-0.5F) * transform.up;
     }
 }

@@ -45,6 +45,7 @@ public abstract class InteractableObject : MonoBehaviour
 
     public virtual void Awake()
     {
+        enabled = false;
         sprite = GetComponentInChildren<SpriteRenderer>();
     }
 }

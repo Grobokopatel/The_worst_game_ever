@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 578, y: 492}
   m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
-  controlID: 89
+  controlID: 1976
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 303, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 90
+  controlID: 1977
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 303, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 91
+  controlID: 1978
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -256,7 +256,7 @@ MonoBehaviour:
   - {fileID: 19}
   - {fileID: 20}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 2
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -408,9 +408,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 5.568359, y: -4.964785, z: -1.680729}
+    m_Target: {x: 5.7780857, y: -5.1347723, z: -12.055417}
     speed: 2
-    m_Value: {x: 5.2787614, y: -5.045818, z: -1.664625}
+    m_Value: {x: 5.7780857, y: -5.1347723, z: -12.055417}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -461,9 +461,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 3.739691
+    m_Target: 2.3198695
     speed: 2
-    m_Value: 3.5786517
+    m_Value: 2.3198695
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -510,21 +510,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 921
+    width: 965
     height: 494
   m_ViewDataDictionary: {fileID: 0}
   m_ViewTransforms:
     m_KeySerializationHelper:
     - {fileID: 7392654298852571690, guid: ab275151cb497e547a33a7414e45dcca, type: 2}
     m_ValueSerializationHelper:
-    - e00: 1
+    - e00: 0.614125
       e01: 0
       e02: 0
-      e03: 0
+      e03: 184.02072
       e10: 0
-      e11: 1
+      e11: 0.614125
       e12: 0
-      e13: 0
+      e13: 48.947998
       e20: 0
       e21: 0
       e22: 1
@@ -577,8 +577,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
+      m_SelectedIDs: 1a400000
+      m_LastClickedID: 16410
       m_ExpandedIDs: 40fbffff22400000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -672,22 +672,22 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources
+    - Assets/Trash
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources
+  - Assets/Trash
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\egotr\source\repos\The_worst_game_ever\Unity stuff
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: de410000
-    m_LastClickedID: 16862
-    m_ExpandedIDs: 00000000d0410000d2410000d4410000d641000000ca9a3b
+    m_SelectedIDs: ea410000
+    m_LastClickedID: 16874
+    m_ExpandedIDs: 00000000ce410000d0410000d2410000d441000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -715,7 +715,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d0410000d2410000d4410000d6410000
+    m_ExpandedIDs: 00000000ce410000d0410000d2410000d441000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -818,7 +818,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 588
-    width: 1519
+    width: 1366
     height: 411
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
@@ -846,7 +846,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 588
-    width: 1519
+    width: 1366
     height: 411
   m_ViewDataDictionary: {fileID: 0}
   m_Preferences:

@@ -6,7 +6,7 @@ public class Boat : InteractableObject
 {
     public override void Interact(Player player)
     {
-        player.transform.position += (-1.5F) * transform.up;
+        player.transform.position = transform.position;
         Destroy(gameObject);
         player.State = PlayerState.InBoat;
     }

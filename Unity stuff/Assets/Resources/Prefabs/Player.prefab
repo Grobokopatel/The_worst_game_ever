@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  boat: {fileID: 0}
 --- !u!95 &1581515277
 Animator:
   serializedVersion: 3
