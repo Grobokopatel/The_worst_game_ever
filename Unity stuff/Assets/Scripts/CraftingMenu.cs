@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class CraftingMenu : MonoBehaviour
 {
@@ -28,7 +29,11 @@ public class CraftingMenu : MonoBehaviour
     {
         foreach (var material in allMaterials)
         {
-            material.Item1.text = $"{Player.player.GetAmountOfItem(material.Item2)}/{material.Item1.text.Split('/')[1]}";
+            var playerHas = Player.player.GetAmountOfItem(material.Item2);
+            //Debug.Log(material.Item1.text.Split('/')[2]);
+            var needed = int.Parse(material.Item1.text.Split(new[] { '/', '<', '>' }, StringSplitOptions.RemoveEmptyEntries)[2]);
+            var color = playerHas < needed ? "red" : "white";
+            material.Item1.text = $"<color={color}>{playerHas}/{needed}</color>";
         }
     }
 
@@ -61,7 +66,7 @@ public class CraftingMenu : MonoBehaviour
                 allMaterials.Add((material.GetComponentInChildren<Text>(true), craftingRecipeMaterial.Item));
 
                 material.GetComponentInChildren<Image>(true).sprite = craftingRecipeMaterial.Item.Icon;
-                material.GetComponentInChildren<Text>(true).text = $"0/{craftingRecipeMaterial.Amount}";
+                material.GetComponentInChildren<Text>(true).text = $"<color=white>0/{craftingRecipeMaterial.Amount}</color>";
             }
         }
         Debug.Log("Инициализация меню крафта");

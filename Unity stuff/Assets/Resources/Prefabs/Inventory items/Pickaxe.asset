@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
   ItemName: "\u041A\u0438\u0440\u043A\u0430"
-  Icon: {fileID: 21300000, guid: 72c9d36ee1a18504990bc59ef3e34434, type: 3}
+  Icon: {fileID: 21300000, guid: 2e8e863858129fe42994f761cb4f86a3, type: 3}

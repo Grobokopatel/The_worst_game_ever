@@ -15,6 +15,13 @@ public class FishingGame : MonoBehaviour
     private int currentArrowIndex;
     private (GameObject arrow, KeyCode key) currentArrowInfo;
     public static KeyCode[] arrowsKeyCodes;
+    private float timeToCaught;
+    private float leftTime;
+
+    [SerializeField]
+    private Image leftPartProgressBar;
+    [SerializeField]
+    private Image rightPartProgressBar;
 
     static FishingGame()
     {
@@ -53,6 +60,10 @@ public class FishingGame : MonoBehaviour
         currentArrowInfo = arrowsInfo.FirstOrDefault();
         currentArrowIndex = 1;
         currentArrowInfo.arrow.GetComponent<Image>().color = Color.red;
+        timeToCaught = 3;
+        leftTime = timeToCaught;
+        leftPartProgressBar.gameObject.SetActive(true);
+        rightPartProgressBar.gameObject.SetActive(true);
     }
 
     private void Start()
@@ -63,7 +74,17 @@ public class FishingGame : MonoBehaviour
 
     void Update()
     {
-        if (currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
+        leftTime -= Time.deltaTime;
+        leftPartProgressBar.fillAmount = leftTime/timeToCaught;
+        rightPartProgressBar.fillAmount = leftTime/timeToCaught;
+        if (leftTime <= 0)
+        {
+            Destroy(gameObject);
+            Player.player.State = PlayerState.Idle;
+        }
+
+
+            if (currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
         {
             if (Input.GetKeyDown(currentArrowInfo.key))
             {
