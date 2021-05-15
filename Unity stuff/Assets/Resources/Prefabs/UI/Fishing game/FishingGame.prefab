@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7293265199432827180}
   - component: {fileID: 7293265199432827181}
   - component: {fileID: 7293265199432827178}
+  - component: {fileID: 1003175903}
   m_Layer: 5
   m_Name: FishingGame
   m_TagString: Untagged
@@ -100,6 +101,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1003175903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7293265199432827179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03dc4e4989c010b428fbae3eec8f3be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 7293265200039060635}
+  arrowPrefab: {fileID: 7399356568212678733, guid: eebcd1b011deaae4787ed3f36d5fd7ea, type: 3}
 --- !u!1 &7293265200039060635
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +172,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 30, y: 30}
+  m_CellSize: {x: 40, y: 40}
   m_Spacing: {x: 10, y: 7}
   m_Constraint: 0
   m_ConstraintCount: 3

@@ -16,4 +16,5 @@ public enum PlayerState
     Idle = 0,
     Run = 1,
     InBoat = 2,
+    Fishing = 3
 }

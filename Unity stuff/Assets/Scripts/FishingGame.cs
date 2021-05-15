@@ -9,22 +9,29 @@ public class FishingGame : MonoBehaviour
 {
     [SerializeField]
     private GameObject grid;
-
     [SerializeField]
     private GameObject arrowPrefab;
-    private List<(GameObject arrow, KeyCode key)> arrowsInfo = new List<(GameObject, KeyCode)>();
+    private readonly List<(GameObject arrow, KeyCode key)> arrowsInfo = new List<(GameObject, KeyCode)>();
+    private int currentArrowIndex;
+    private (GameObject arrow, KeyCode key) currentArrowInfo;
+    public static KeyCode[] arrowsKeyCodes;
 
-    public void Awake()
+    static FishingGame()
     {
-        //Player.player.enabled = false;
-        int arrowNumber = 19;
+        arrowsKeyCodes = new[] { KeyCode.DownArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow };
+    }
+    
+    public void InstantiateGame()
+    {
         var rng = new System.Random();
+        var arrowNumber = rng.Next(4, 15);
         for (var i = 0; i < arrowNumber; ++i)
-        {//273-276 ^ !^ > <
-            var arrow = Instantiate(arrowPrefab, grid.transform); //< !^ > ^
+        {
+            var arrow = Instantiate(arrowPrefab, grid.transform);
             var turnAmount = rng.Next(4);
             arrow.GetComponent<Image>().transform.Rotate(0, 0, 90 * turnAmount, Space.Self);
             KeyCode key;
+
             switch (turnAmount)
             {
                 case 0:
@@ -43,34 +50,42 @@ public class FishingGame : MonoBehaviour
 
             arrowsInfo.Add((arrow, key));
         }
+        currentArrowInfo = arrowsInfo.FirstOrDefault();
+        currentArrowIndex = 1;
+        currentArrowInfo.arrow.GetComponent<Image>().color = Color.red;
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-
+        enabled = false;
+        StartCoroutine(Technical.Timer(new System.Random().Next(3, 6), () => { InstantiateGame(); enabled = true; }));
     }
 
-    // Update is called once per frame
     void Update()
     {
-        foreach (var arrowInfo in arrowsInfo)
+        if (currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
         {
-            var arrowImage = arrowInfo.arrow.GetComponent<Image>();
-            arrowImage.color = Color.red;
-            while (true)
+            if (Input.GetKeyDown(currentArrowInfo.key))
             {
-                if (Input.GetKeyDown(arrowInfo.key))
+                Debug.Log("Нужная клавиша");
+                currentArrowInfo.arrow.GetComponent<Image>().color = Color.white;
+                if (currentArrowIndex != arrowsInfo.Count)
                 {
-                    Debug.Log("Нужная клавиша");
-                    arrowImage.color = Color.white;
-                    break;
+                    currentArrowInfo = arrowsInfo[currentArrowIndex];
+                    currentArrowInfo.arrow.GetComponent<Image>().color = Color.red;
+                    ++currentArrowIndex;
                 }
-                /*else if(Input.GetKeyDown(arrowInfo.key))
+                else
                 {
-                    Debug.Log("Не та клавиша");
-                    arrowImage.color = Color.white;
-                    break;
-                }*/
+                    Player.player.State = PlayerState.Idle;
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                Player.player.State = PlayerState.Idle;
+                Debug.Log("Не та клавиша");
+                Destroy(gameObject);
             }
         }
     }

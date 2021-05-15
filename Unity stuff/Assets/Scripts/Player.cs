@@ -15,8 +15,9 @@ public class Player : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sprite;
     public static Player player;
-    public const float ConstantYPosition = -6.283F;
-
+    public readonly static float ConstantYPosition = -6.283F;
+    [SerializeField]
+    private GameObject fishingGamePrefab;
     [SerializeField]
     private GameObject boat;
     public PlayerState State
@@ -28,18 +29,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    private InteractableObject currentInteractable;
     public InteractableObject CurrentInteractable
     {
-        get => currentInteractable;
-        set
-        {
-            currentInteractable = value;
-        }
+        get;
+        set;
     }
 
     private void Awake()
     {
+        AddDeltaItems(Technical.GetItem("Log"), 5);
+        AddDeltaItems(Technical.GetItem("Rock"), 5);
         player = this;
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -48,7 +47,18 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (player.State != PlayerState.InBoat)
+        if(State == PlayerState.Fishing || Input.GetKeyDown(KeyCode.F))
+        {
+            if (State != PlayerState.Fishing)
+            {
+                Instantiate(fishingGamePrefab);
+                State = PlayerState.Fishing;
+            }
+
+            return;
+        }
+
+        if (State != PlayerState.InBoat)
             State = PlayerState.Idle;
         else if (Input.GetKeyDown(KeyCode.E) && GetCollidersInPosition(transform.position + 1F * transform.up).Length >= 1)
         {

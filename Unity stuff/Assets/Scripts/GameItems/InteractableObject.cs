@@ -4,17 +4,21 @@ using UnityEngine;
 
 public abstract class InteractableObject : MonoBehaviour
 {
-    private SpriteRenderer sprite;
-
+    public SpriteRenderer Sprite
+    {
+        get;
+        set;
+    }
+    
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         var player = collision.GetComponent<Player>();
 
-        if (player)
+        if (player && ShouldHighlight(player))
         {
             if (player.CurrentInteractable != null)
-                player.CurrentInteractable.sprite.color = Color.white;
-            sprite.color = Color.yellow;
+                player.CurrentInteractable.Sprite.color = Color.white;
+            Sprite.color = Color.yellow;
             player.CurrentInteractable = this;
         }
     }
@@ -23,9 +27,9 @@ public abstract class InteractableObject : MonoBehaviour
     {
         var player = collision.GetComponent<Player>();
 
-        if (player && player.CurrentInteractable == null)
+        if (player && ShouldHighlight(player) && player.CurrentInteractable == null)
         {
-            sprite.color = Color.yellow;
+            Sprite.color = Color.yellow;
             player.CurrentInteractable = this;
         }
     }
@@ -36,16 +40,20 @@ public abstract class InteractableObject : MonoBehaviour
 
         if (player && player.CurrentInteractable == this)
         {
-            sprite.color = Color.white;
+            Sprite.color = Color.white;
             player.CurrentInteractable = null;
         }
     }
 
     public abstract void Interact(Player player);
 
+    public virtual bool ShouldHighlight(Player player)
+    {
+        return true;
+    }
+
     public virtual void Awake()
     {
-        enabled = false;
-        sprite = GetComponentInChildren<SpriteRenderer>();
+        Sprite = GetComponentInChildren<SpriteRenderer>();
     }
 }

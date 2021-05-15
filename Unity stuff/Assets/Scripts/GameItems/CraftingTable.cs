@@ -5,17 +5,16 @@ using UnityEngine;
 public class CraftingTable : InteractableObject
 {
     [SerializeField]
-    private GameObject craftingMenu;
+    private CraftingMenu craftingMenu;
     [SerializeField]
     private CameraController cameraController;
 
     public override void Interact(Player player)
     {
-        craftingMenu.SetActive(true);
-        CraftingMenu.craftingMenu.UpdateItemsAmount();
+        craftingMenu.gameObject.SetActive(true);
+        craftingMenu.UpdateItemsAmount();
         Player.player.enabled = false;
         cameraController.XOffset = 3.5F;
-        enabled = true;
         #region
         /*GetComponent<FirstPersonController>().enabled = !canvas.active;
         if (canvas.active)
@@ -33,16 +32,5 @@ public class CraftingTable : InteractableObject
             }
         }*/
         #endregion
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            CraftingMenu.craftingMenu.gameObject.SetActive(false);
-            Player.player.enabled = true;
-            cameraController.XOffset = 0;
-            enabled = false;
-        }
     }
 }

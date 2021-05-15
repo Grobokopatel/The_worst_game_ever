@@ -20,7 +20,7 @@ public class CraftingMenu : MonoBehaviour
     [SerializeField]
     private GameObject materialsHolder;
 
-    private List<(Text, Item)> allMaterials = new List<(Text, Item)>();
+    private readonly List<(Text, Item)> allMaterials = new List<(Text, Item)>();
 
     public static CraftingMenu craftingMenu;
 
@@ -32,8 +32,19 @@ public class CraftingMenu : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameObject.SetActive(false);
+            Player.player.enabled = true;
+            cameraController.XOffset = 0;
+        }
+    }
+
     private void Awake()
     {
+        gameObject.SetActive(false);
         craftingMenu = this;
         var craftingRecipes = Resources.LoadAll<CraftingRecipe>("Prefabs/Crafting recipes");
         foreach (var craftingRecipe in craftingRecipes)

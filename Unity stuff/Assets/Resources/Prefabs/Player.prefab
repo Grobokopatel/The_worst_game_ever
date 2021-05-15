@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  fishingGamePrefab: {fileID: 0}
   boat: {fileID: 0}
 --- !u!95 &1581515277
 Animator:
@@ -185,7 +186,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 5
   m_Sprite: {fileID: -4454798973080474970, guid: 473deca20e08fb842a9d03a6857a542c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
