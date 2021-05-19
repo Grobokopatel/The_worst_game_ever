@@ -59,22 +59,25 @@
     <Compile Include="Assets\Scripts\GameItems\Item.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\GameItems\Interactable.cs" />
-    <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\UI\CameraController.cs" />
     <Compile Include="Assets\Scripts\Enums.cs" />
     <Compile Include="Assets\Scripts\ObjectsLinks.cs" />
-    <Compile Include="Assets\Scripts\CraftingRecipe.cs" />
+    <Compile Include="Assets\Scripts\UI\CraftingRecipe.cs" />
     <Compile Include="Assets\Scripts\GameItems\Collectable.cs" />
-    <Compile Include="Assets\Scripts\FishingGame.cs" />
+    <Compile Include="Assets\Scripts\UI\FishingGame.cs" />
     <Compile Include="Assets\Scripts\GameItems\Destructible.cs" />
-    <Compile Include="Assets\Scripts\CraftButton.cs" />
+    <Compile Include="Assets\Scripts\UI\CraftButton.cs" />
     <Compile Include="Assets\Scripts\Bobber.cs" />
     <Compile Include="Assets\Scripts\GameItems\DebugCircle.cs" />
-    <Compile Include="Assets\Scripts\CraftingMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\CraftingMenu.cs" />
     <Compile Include="Assets\Scripts\GameItems\CraftingTable.cs" />
     <Compile Include="Assets\Scripts\Boat.cs" />
     <Compile Include="Assets\Scripts\Technical.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\CirclesOnWater.cs" />
+    <Compile Include="Assets\Scripts\UI\TradingMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\TradeButton.cs" />
+    <Compile Include="Assets\Scripts\GameItems\Shop.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
