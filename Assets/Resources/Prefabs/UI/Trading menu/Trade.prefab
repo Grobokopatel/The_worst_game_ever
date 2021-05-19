@@ -581,8 +581,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8835055995456856378, guid: 953175ca0235793449a97fd28f982bc9, type: 3}
-        m_TargetAssemblyTypeName: CraftButton, Assembly-CSharp
+      - m_Target: {fileID: 3251553267628609542}
+        m_TargetAssemblyTypeName: TradeButton, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
