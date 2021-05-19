@@ -14,22 +14,45 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer sprite;
+    private BoxCollider2D collider;
     public static Player player;
     public readonly static float ConstantYPosition = -6.283F;
     [SerializeField]
     private GameObject fishingGamePrefab;
     [SerializeField]
     private GameObject boat;
+    private Bobber bobber;
+
     public PlayerState State
     {
         get => (PlayerState)animator.GetInteger("State");
         set
         {
+            switch (value)
+            {
+                case PlayerState.Idle:
+                    var newPosition = player.transform.position;
+                    newPosition.y = ConstantYPosition;
+                    transform.position = newPosition;
+                    break;
+
+                case PlayerState.Run:
+
+                    break;
+
+                case PlayerState.InBoat:
+                    sprite.sortingOrder = 11;
+                    break;
+
+                case PlayerState.Fishing:
+                    Instantiate(fishingGamePrefab);
+                    break;
+            }
             animator.SetInteger("State", (int)value);
         }
     }
 
-    public InteractableObject CurrentInteractable
+    public Interactable CurrentInteractable
     {
         get;
         set;
@@ -37,21 +60,23 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        AddDeltaItems(Technical.GetItem("Log"), 5);
-        AddDeltaItems(Technical.GetItem("Rock"), 5);
+        AddDeltaItems("Log", 5);
+        AddDeltaItems("Rock", 5);
+        AddDeltaItems("FishingRod", 1);
         player = this;
+        collider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        bobber = GetComponentInChildren<Bobber>();
     }
 
     private void Update()
     {
-        if(State == PlayerState.Fishing || Input.GetKeyDown(KeyCode.F))
+        if ((Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod")>=1 && State!=PlayerState.InBoat) || State == PlayerState.Fishing)
         {
             if (State != PlayerState.Fishing)
             {
-                Instantiate(fishingGamePrefab);
                 State = PlayerState.Fishing;
             }
 
@@ -60,13 +85,15 @@ public class Player : MonoBehaviour
 
         if (State != PlayerState.InBoat)
             State = PlayerState.Idle;
-        else if (Input.GetKeyDown(KeyCode.E) && GetCollidersInPosition(transform.position + 1F * transform.up).Length >= 1)
+        else if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+            && GetCollidersInPosition(transform.position + transform.up + 0.75F * transform.right).Length >= 1
+            && GetCollidersInPosition(transform.position + transform.up - 0.75F * transform.right).Length >= 1
+            && GetCollidersInPosition(transform.position + transform.up).Length >= 1
+            )
         {
             Instantiate(boat, transform.position, transform.rotation);
-            var newPosition = player.transform.position;
-            newPosition.y = ConstantYPosition;
-            transform.position = newPosition;
-            player.State = PlayerState.Idle;
+            State = PlayerState.Idle;
+            sprite.sortingOrder = 5;
         }
 
         if (CurrentInteractable != null && Input.GetKeyDown(KeyCode.E))
@@ -77,26 +104,38 @@ public class Player : MonoBehaviour
             if (State == PlayerState.InBoat)
                 Swim();
             else
-                Move();
+                Walk();
         }
     }
 
     private void Swim()
     {
-        var deltaMovement = transform.right * Input.GetAxis("Horizontal");
-        sprite.flipX = deltaMovement.x < 0;
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement, speed * Time.deltaTime);
+        Move(false);
     }
 
-    private void Move()
+    private void Walk()
     {
         State = PlayerState.Run;
+        Move(true);
+    }
+
+    private void Move(bool shouldCheckOnCollidersAhead)
+    {
         var deltaMovement = transform.right * Input.GetAxis("Horizontal");
-        var collidersAmount = GetCollidersInPosition(transform.position + 0.5F * deltaMovement.normalized + (-0.5F) * transform.up).Length;
         sprite.flipX = deltaMovement.x < 0;
-        if (collidersAmount >= 1)
+
+        var colliderOffset = collider.offset;
+        colliderOffset.x = (float)Math.Abs(colliderOffset.x) * (sprite.flipX ? 1 : -1);
+        collider.offset = colliderOffset;
+
+        var bobberCoords = bobber.transform.localPosition;
+        bobberCoords.x = (float)Math.Abs(bobberCoords.x) * (sprite.flipX ? -1 : 1);
+        bobber.transform.localPosition = bobberCoords;
+
+        if (!shouldCheckOnCollidersAhead || GetCollidersInPosition(transform.position + 0.5F * deltaMovement.normalized + (-0.5F) * transform.up).Length >= 1)
             transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement, speed * Time.deltaTime);
     }
+
 
     public static Collider2D[] GetCollidersInPosition(Vector3 position)
     {
@@ -113,6 +152,15 @@ public class Player : MonoBehaviour
             inventory[item] = deltaAmount;
     }
 
+    public void AddDeltaItems(string itemName, int deltaAmount)
+    {
+        var item = Technical.GetItem(itemName);
+        if (inventory.ContainsKey(item))
+            inventory[item] += deltaAmount;
+        else
+            inventory[item] = deltaAmount;
+    }
+
     public int GetAmountOfItem(Item item)
     {
         if (inventory.ContainsKey(item))
@@ -122,12 +170,13 @@ public class Player : MonoBehaviour
         return 0;
     }
 
-    //public float GetPositionAfterMovement(float currentPosition, float nextPosition)
-    //{
-    //    var greaterCord = Math.Max(currentPosition, nextPosition);
-    //    var lesserCord = Math.Min(currentPosition, nextPosition);
-    //
-    //    return currentSubWorld.Barriers.Any(barrierCord => lesserCord <= barrierCord && barrierCord <= greaterCord)
-    //        ? currentPosition : nextPosition;
-    //}
+    public int GetAmountOfItem(string itemName)
+    {
+        var item = Technical.GetItem(itemName);
+        if (inventory.ContainsKey(item))
+            return inventory[item];
+
+        AddDeltaItems(item, 0);
+        return 0;
+    }
 }

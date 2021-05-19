@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destructible : InteractableObject
+public class Destructible : Interactable
 {
     [SerializeField]
     private GameObject toSpawn;

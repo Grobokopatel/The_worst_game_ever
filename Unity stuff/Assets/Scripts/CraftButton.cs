@@ -18,8 +18,8 @@ public class CraftButton : MonoBehaviour
         {
             Debug.Log($"Ты скрафтил {ThisButtonRecipe.Results[0].Item.ItemName}");
             ThisButtonRecipe.Craft(player);
-            Debug.Log($"Количество брёвен после крафта {player.GetAmountOfItem(Technical.GetItem("Log"))}");
-            Debug.Log($"Количество камней после крафта {player.GetAmountOfItem(Technical.GetItem("Rock"))}");
+            Debug.Log($"Количество брёвен после крафта {player.GetAmountOfItem("Log")}");
+            Debug.Log($"Количество камней после крафта {player.GetAmountOfItem("Rock")}");
             CraftingMenu.craftingMenu.UpdateItemsAmount();
         }
         else

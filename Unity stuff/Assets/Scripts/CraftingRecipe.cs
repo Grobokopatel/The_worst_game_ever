@@ -14,7 +14,14 @@ public struct ItemAmount
     [SerializeField]
     [Range(0,999)]
     private int amount;
-    public int Amount => amount;
+    public int Amount
+    {
+        get => amount;
+        set
+        {
+            amount = value;
+        }
+    }
 }
 
 

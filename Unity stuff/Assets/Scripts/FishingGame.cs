@@ -9,6 +9,7 @@ public class FishingGame : MonoBehaviour
 {
     [SerializeField]
     private GameObject grid;
+    private bool flag = true;
     [SerializeField]
     private GameObject arrowPrefab;
     private readonly List<(GameObject arrow, KeyCode key)> arrowsInfo = new List<(GameObject, KeyCode)>();
@@ -17,21 +18,24 @@ public class FishingGame : MonoBehaviour
     public static KeyCode[] arrowsKeyCodes;
     private float timeToCaught;
     private float leftTime;
-
+    private Timer timer;
+    private Color currentButtonColor = Color.red;
     [SerializeField]
     private Image leftPartProgressBar;
     [SerializeField]
     private Image rightPartProgressBar;
+    [SerializeField]
+    private Bobber playersBobber;
 
     static FishingGame()
     {
-        arrowsKeyCodes = new[] { KeyCode.DownArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow };
+        arrowsKeyCodes = Enumerable.Range(273, 4).Select(number => (KeyCode)number).ToArray();
     }
-    
+
     public void InstantiateGame()
     {
         var rng = new System.Random();
-        var arrowNumber = rng.Next(4, 15);
+        var arrowNumber = rng.Next(12, 20);
         for (var i = 0; i < arrowNumber; ++i)
         {
             var arrow = Instantiate(arrowPrefab, grid.transform);
@@ -59,32 +63,53 @@ public class FishingGame : MonoBehaviour
         }
         currentArrowInfo = arrowsInfo.FirstOrDefault();
         currentArrowIndex = 1;
-        currentArrowInfo.arrow.GetComponent<Image>().color = Color.red;
-        timeToCaught = 3;
+        currentArrowInfo.arrow.GetComponent<Image>().color = currentButtonColor;
+        timeToCaught = 0.35F * arrowNumber;
         leftTime = timeToCaught;
-        leftPartProgressBar.gameObject.SetActive(true);
-        rightPartProgressBar.gameObject.SetActive(true);
+        leftPartProgressBar.enabled = true;
+        rightPartProgressBar.enabled = true;
     }
 
     private void Start()
     {
-        enabled = false;
-        StartCoroutine(Technical.Timer(new System.Random().Next(3, 6), () => { InstantiateGame(); enabled = true; }));
+        playersBobber = Player.player.GetComponentInChildren<Bobber>();
+        timer = new Timer(new System.Random().Next(0));
     }
 
     void Update()
     {
+        if (timer.LeftTime > 0)
+        {
+            if (Input.GetButton("Horizontal"))
+            {
+                Player.player.State = PlayerState.Run;
+                Destroy(gameObject);
+            }
+
+            return;
+        }
+        if (timer.WasOverOnThisFrame())
+        {
+            if (!playersBobber.HasAnyCirclesOnIt())
+            {
+                Player.player.State = PlayerState.Idle;
+                Debug.Log("Не клюёт");
+                Destroy(gameObject);
+                return;
+            }
+            InstantiateGame();
+        }
+
         leftTime -= Time.deltaTime;
-        leftPartProgressBar.fillAmount = leftTime/timeToCaught;
-        rightPartProgressBar.fillAmount = leftTime/timeToCaught;
+        leftPartProgressBar.fillAmount = leftTime / timeToCaught;
+        rightPartProgressBar.fillAmount = leftTime / timeToCaught;
         if (leftTime <= 0)
         {
             Destroy(gameObject);
             Player.player.State = PlayerState.Idle;
         }
 
-
-            if (currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
+        if (currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
         {
             if (Input.GetKeyDown(currentArrowInfo.key))
             {
@@ -93,11 +118,13 @@ public class FishingGame : MonoBehaviour
                 if (currentArrowIndex != arrowsInfo.Count)
                 {
                     currentArrowInfo = arrowsInfo[currentArrowIndex];
-                    currentArrowInfo.arrow.GetComponent<Image>().color = Color.red;
+                    currentArrowInfo.arrow.GetComponent<Image>().color = currentButtonColor;
                     ++currentArrowIndex;
                 }
                 else
                 {
+                    var prize = playersBobber.TryToCatchItem();
+                    Player.player.AddDeltaItems(prize, 1);
                     Player.player.State = PlayerState.Idle;
                     Destroy(gameObject);
                 }
