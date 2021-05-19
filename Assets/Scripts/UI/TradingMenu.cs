@@ -57,12 +57,14 @@ public class TradingMenu : MonoBehaviour
             var resultObject = tradeButton.ResultObject;
 
             materialObject.GetComponentInChildren<Image>().sprite = firstMaterial.Item.Icon;
-            materialObject.GetComponentInChildren<Text>().text = $"{Player.player.GetAmountOfItem(firstMaterial.Item)}/{firstMaterial.Amount}";
+            materialObject.GetComponentInChildren<Text>().text = $"<color=white>{Player.player.GetAmountOfItem(firstMaterial.Item)}/{firstMaterial.Amount}</color>";
 
             resultObject.GetComponentInChildren<Image>().sprite = firstResult.Item.Icon;
             resultObject.GetComponentInChildren<Text>().text = firstResult.Amount.ToString();
 
             tradeButton.NameObject.text = firstResult.Item.ItemName;
+
+            allMaterials.Add((materialObject.GetComponentInChildren<Text>(), firstMaterial.Item));
         }
         Debug.Log("Инициализация меню трейдинга");
     }

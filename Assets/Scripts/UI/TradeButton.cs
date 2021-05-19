@@ -41,7 +41,7 @@ public class TradeButton : MonoBehaviour
             TradeInfo.Craft(player);
             Debug.Log($"Количество брёвен после крафта {player.GetAmountOfItem("Log")}");
             Debug.Log($"Количество камней после крафта {player.GetAmountOfItem("Rock")}");
-            CraftingMenu.craftingMenu.UpdateItemsAmount();
+            TradingMenu.tradingMenu.UpdateItemsAmount();
         }
         else
         {
