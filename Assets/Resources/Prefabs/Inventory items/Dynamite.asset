@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Dynamite
   m_EditorClassIdentifier: 
   ItemName: "\u0414\u0438\u043D\u0430\u043C\u0438\u0442"
-  Icon: {fileID: 21300000, guid: 72c9d36ee1a18504990bc59ef3e34434, type: 3}
+  Icon: {fileID: 21300000, guid: 56ec3790a61dff14a9ca906037b01ae3, type: 3}

@@ -22,7 +22,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject boat;
     private Bobber bobber;
-
+    [SerializeField]
+    private GameObject boatPrefab;
     public PlayerState State
     {
         get => (PlayerState)animator.GetInteger("State");
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod")>=1 && State!=PlayerState.InBoat) || State == PlayerState.Fishing)
+        if ((Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod") >= 1 && State != PlayerState.InBoat) || State == PlayerState.Fishing)
         {
             if (State != PlayerState.Fishing)
             {
@@ -146,7 +147,14 @@ public class Player : MonoBehaviour
 
     public void AddDeltaItems(Item item, int deltaAmount)
     {
-        if (inventory.ContainsKey(item))
+        if (item.ItemName == "Лодка")
+        {
+            var playerPosition = transform.position;
+            playerPosition.x += 2;
+            playerPosition.y = -7.316F;
+            Instantiate(boatPrefab, playerPosition, transform.rotation);
+        }
+        else if (inventory.ContainsKey(item))
             inventory[item] += deltaAmount;
         else
             inventory[item] = deltaAmount;

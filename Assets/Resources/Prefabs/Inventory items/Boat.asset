@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 600305339eeccee4cbb782f3fa7e8016, type: 3}
-  m_Name: Fish
+  m_Name: Boat
   m_EditorClassIdentifier: 
-  ItemName: "\u0420\u044B\u0431\u0430"
-  Icon: {fileID: 21300000, guid: 2096f8853322a2742ab2572169ab7b76, type: 3}
+  ItemName: "\u041B\u043E\u0434\u043A\u0430"
+  Icon: {fileID: 21300000, guid: d4f388e196487ad438ce554054ce3b60, type: 3}

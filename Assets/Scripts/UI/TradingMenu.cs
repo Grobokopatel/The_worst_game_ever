@@ -50,11 +50,11 @@ public class TradingMenu : MonoBehaviour
             var tradeObject = Instantiate(tradePrefab, tradeHolder.transform);
             var firstResult = tradeInfo.Results[0];
             var firstMaterial = tradeInfo.Materials[0];
-            var tradeButton = tradeObject.GetComponent<TradeButton>();
+            var buttonComponent = tradeObject.GetComponent<TradeButton>();
 
-            tradeButton.TradeInfo = tradeInfo;
-            var materialObject = tradeButton.MaterialObject;
-            var resultObject = tradeButton.ResultObject;
+            buttonComponent.TradeInfo = tradeInfo;
+            var materialObject = buttonComponent.MaterialObject;
+            var resultObject = buttonComponent.ResultObject;
 
             materialObject.GetComponentInChildren<Image>().sprite = firstMaterial.Item.Icon;
             materialObject.GetComponentInChildren<Text>().text = $"<color=white>{Player.player.GetAmountOfItem(firstMaterial.Item)}/{firstMaterial.Amount}</color>";
@@ -62,7 +62,7 @@ public class TradingMenu : MonoBehaviour
             resultObject.GetComponentInChildren<Image>().sprite = firstResult.Item.Icon;
             resultObject.GetComponentInChildren<Text>().text = firstResult.Amount.ToString();
 
-            tradeButton.NameObject.text = firstResult.Item.ItemName;
+            buttonComponent.NameObject.text = firstResult.Item.ItemName;
 
             allMaterials.Add((materialObject.GetComponentInChildren<Text>(), firstMaterial.Item));
         }

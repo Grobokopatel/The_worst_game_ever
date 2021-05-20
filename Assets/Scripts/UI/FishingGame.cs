@@ -9,16 +9,15 @@ public class FishingGame : MonoBehaviour
 {
     [SerializeField]
     private GameObject grid;
-    private bool flag = true;
     [SerializeField]
     private GameObject arrowPrefab;
     private readonly List<(GameObject arrow, KeyCode key)> arrowsInfo = new List<(GameObject, KeyCode)>();
     private int currentArrowIndex;
     private (GameObject arrow, KeyCode key) currentArrowInfo;
-    public static KeyCode[] arrowsKeyCodes;
+    public static KeyCode[] arrowsKeyCodes= Enumerable.Range(273, 4).Select(number => (KeyCode)number).ToArray();
     private float timeToCaught;
     private float leftTime;
-    private Timer timer;
+    private Timer timer = new Timer(new System.Random().Next(0));
     private Color currentButtonColor = Color.red;
     [SerializeField]
     private Image leftPartProgressBar;
@@ -26,11 +25,6 @@ public class FishingGame : MonoBehaviour
     private Image rightPartProgressBar;
     [SerializeField]
     private Bobber playersBobber;
-
-    static FishingGame()
-    {
-        arrowsKeyCodes = Enumerable.Range(273, 4).Select(number => (KeyCode)number).ToArray();
-    }
 
     public void InstantiateGame()
     {
@@ -73,7 +67,6 @@ public class FishingGame : MonoBehaviour
     private void Start()
     {
         playersBobber = Player.player.GetComponentInChildren<Bobber>();
-        timer = new Timer(new System.Random().Next(0));
     }
 
     void Update()

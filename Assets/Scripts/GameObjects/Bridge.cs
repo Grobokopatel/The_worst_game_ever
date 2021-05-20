@@ -1,0 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Bridge : Interactable
+{
+    [SerializeField]
+    private GameObject materials;
+    [SerializeField]
+    private Image mark;
+    [SerializeField]
+    private Text amount;
+    [SerializeField]
+    private Sprite checkMark;
+    [SerializeField]
+    private Sprite cross;
+    private BoxCollider2D collider;
+    private bool isRepaired = false;
+    protected override void Initialize()
+    {
+        OnPlayerEntry += player =>
+        {
+            materials.SetActive(true);
+            UpdateItemsAmount();
+        };
+        OnPlayerExit += player => materials.SetActive(false);
+        defaultColor = new Color(255, 255, 255, 0);
+        highlightedColor = new Color(0, 255, 1, 0.6588F);
+        collider = GetComponent<BoxCollider2D>();
+    }
+
+    private void UpdateItemsAmount()
+    {
+        var playerHas = Player.player.GetAmountOfItem("Log");
+        var color = playerHas < 3 ? "red" : "white";
+        amount.text = $"<color={color}>{playerHas}/3</color>";
+
+        mark.sprite = Player.player.GetAmountOfItem("Axe") >= 1 ? checkMark : cross;
+    }
+
+    protected override bool ShouldHighlight(Player player)
+    {
+        return !isRepaired;
+    }
+
+    public override void Interact(Player player)
+    {
+        if(Player.player.GetAmountOfItem("Log")>=3 && Player.player.GetAmountOfItem("Axe")>=1)
+        {
+            materials.SetActive(false);
+            Sprite.color = new Color(255,255,255,1);
+            defaultColor = Sprite.color;
+            enabled = false;
+            isRepaired = true;
+
+            var oldSize = collider.size;
+            oldSize.y = 3;
+            collider.size = oldSize;
+        }
+    }
+}
