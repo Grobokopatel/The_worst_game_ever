@@ -19,8 +19,6 @@ public class Player : MonoBehaviour
     public readonly static float ConstantYPosition = -6.283F;
     [SerializeField]
     private GameObject fishingGamePrefab;
-    [SerializeField]
-    private GameObject boat;
     private Bobber bobber;
     [SerializeField]
     private GameObject boatPrefab;
@@ -87,12 +85,12 @@ public class Player : MonoBehaviour
         if (State != PlayerState.InBoat)
             State = PlayerState.Idle;
         else if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-            && GetCollidersInPosition(transform.position + transform.up + 0.75F * transform.right).Length >= 1
-            && GetCollidersInPosition(transform.position + transform.up - 0.75F * transform.right).Length >= 1
-            && GetCollidersInPosition(transform.position + transform.up).Length >= 1
+            && Technical.GetCollidersInPosition(transform.position + transform.up + 0.75F * transform.right).Length >= 1
+            && Technical.GetCollidersInPosition(transform.position + transform.up - 0.75F * transform.right).Length >= 1
+            && Technical.GetCollidersInPosition(transform.position + transform.up).Length >= 1
             )
         {
-            Instantiate(boat, transform.position, transform.rotation);
+            Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>().flipX = !sprite.flipX;
             State = PlayerState.Idle;
             sprite.sortingOrder = 5;
         }
@@ -133,14 +131,8 @@ public class Player : MonoBehaviour
         bobberCoords.x = (float)Math.Abs(bobberCoords.x) * (sprite.flipX ? -1 : 1);
         bobber.transform.localPosition = bobberCoords;
 
-        if (!shouldCheckOnCollidersAhead || GetCollidersInPosition(transform.position + 0.5F * deltaMovement.normalized + (-0.5F) * transform.up).Length >= 1)
+        if (!shouldCheckOnCollidersAhead || Technical.GetCollidersInPosition(transform.position + 0.5F * deltaMovement.normalized + (-0.5F) * transform.up).Length >= 1)
             transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement, speed * Time.deltaTime);
-    }
-
-
-    public static Collider2D[] GetCollidersInPosition(Vector3 position)
-    {
-        return Physics2D.OverlapCircleAll(position, 0.1F);
     }
 
     private readonly Dictionary<Item, int> inventory = new Dictionary<Item, int>();

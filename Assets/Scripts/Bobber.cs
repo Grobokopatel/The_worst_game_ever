@@ -7,15 +7,16 @@ public class Bobber : MonoBehaviour
 {
     public bool HasAnyCirclesOnIt()
     {
-        return Player.GetCollidersInPosition(transform.position).Any(collider => collider.GetComponent<CirclesOnWater>());
+        return Technical.GetCollidersInPosition(transform.position)
+            .Any(collider => collider.GetComponent<CirclesOnWater>());
     }
 
     public Item TryToCatchItem()
     {
-        return Player.GetCollidersInPosition(transform.position)
+        return Technical.GetCollidersInPosition(transform.position)
             .Select(collider => collider.GetComponent<CirclesOnWater>())
             .Where(circlesOnWater => circlesOnWater != null)
             .FirstOrDefault()
-            ?.GetRandomItem();
+            .GetRandomItem();
     }
 }

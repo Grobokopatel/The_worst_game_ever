@@ -11,13 +11,15 @@ public class Destructible : Interactable
     {
         itemsToDestroyObject["Boulder"] = Technical.GetItem("Pickaxe");
         itemsToDestroyObject["Tree"] = Technical.GetItem("Axe");
+        itemsToDestroyObject["BigBoulder"] = Technical.GetItem("Dynamite");
     }
 
     public override void Interact(Player player)
     {
         var objectTransform = gameObject.transform;
         Destroy(gameObject);
-        Instantiate(toSpawn, objectTransform);
+        if (toSpawn != null)
+            Instantiate(toSpawn, objectTransform.position, objectTransform.rotation);
     }
 
     protected override bool ShouldHighlight(Player player)

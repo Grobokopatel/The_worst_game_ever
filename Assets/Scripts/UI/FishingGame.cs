@@ -14,10 +14,10 @@ public class FishingGame : MonoBehaviour
     private readonly List<(GameObject arrow, KeyCode key)> arrowsInfo = new List<(GameObject, KeyCode)>();
     private int currentArrowIndex;
     private (GameObject arrow, KeyCode key) currentArrowInfo;
-    public static KeyCode[] arrowsKeyCodes= Enumerable.Range(273, 4).Select(number => (KeyCode)number).ToArray();
+    public static KeyCode[] arrowsKeyCodes = Enumerable.Range(273, 4).Select(number => (KeyCode)number).ToArray();
     private float timeToCaught;
     private float leftTime;
-    private Timer timer = new Timer(new System.Random().Next(0));
+    private Timer timer = new Timer(new System.Random().Next(3, 6));
     private Color currentButtonColor = Color.red;
     [SerializeField]
     private Image leftPartProgressBar;
@@ -25,11 +25,23 @@ public class FishingGame : MonoBehaviour
     private Image rightPartProgressBar;
     [SerializeField]
     private Bobber playersBobber;
+    private CirclesOnWater currentCircles;
+    private int arrowNumber;
 
     public void InstantiateGame()
     {
+
+        currentCircles = Technical.GetCollidersInPosition(playersBobber.transform.position)
+         .Select(collider => collider.gameObject.GetComponent<CirclesOnWater>())
+         .First(component => component != null);
+
         var rng = new System.Random();
-        var arrowNumber = rng.Next(12, 20);
+
+        if (currentCircles.MaxArrowAmount == 0)
+            arrowNumber = rng.Next(12, 20);
+        else
+            arrowNumber = rng.Next(currentCircles.MinArrowAmount, currentCircles.MaxArrowAmount);
+
         for (var i = 0; i < arrowNumber; ++i)
         {
             var arrow = Instantiate(arrowPrefab, grid.transform);
@@ -58,10 +70,11 @@ public class FishingGame : MonoBehaviour
         currentArrowInfo = arrowsInfo.FirstOrDefault();
         currentArrowIndex = 1;
         currentArrowInfo.arrow.GetComponent<Image>().color = currentButtonColor;
-        timeToCaught = 0.35F * arrowNumber;
-        leftTime = timeToCaught;
         leftPartProgressBar.enabled = true;
         rightPartProgressBar.enabled = true;
+
+        timeToCaught = currentCircles.SecondsPerArrow * arrowNumber;
+        leftTime = timeToCaught;
     }
 
     private void Start()
@@ -71,9 +84,9 @@ public class FishingGame : MonoBehaviour
 
     void Update()
     {
-        if (timer.LeftTime > 0)
+        if (timer.LeftTime > 0 || Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetButton("Horizontal"))
+            if ((Input.GetButton("Horizontal") && timer.LeftTime > 0) || Input.GetKeyDown(KeyCode.Escape))
             {
                 Player.player.State = PlayerState.Run;
                 Destroy(gameObject);
@@ -81,6 +94,7 @@ public class FishingGame : MonoBehaviour
 
             return;
         }
+
         if (timer.WasOverOnThisFrame())
         {
             if (!playersBobber.HasAnyCirclesOnIt())
@@ -116,7 +130,7 @@ public class FishingGame : MonoBehaviour
                 }
                 else
                 {
-                    var prize = playersBobber.TryToCatchItem();
+                    var prize = currentCircles.GetRandomItem();
                     Player.player.AddDeltaItems(prize, 1);
                     Player.player.State = PlayerState.Idle;
                     Destroy(gameObject);

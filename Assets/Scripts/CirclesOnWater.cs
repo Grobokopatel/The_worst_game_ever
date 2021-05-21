@@ -5,7 +5,44 @@ using System;
 
 public class CirclesOnWater : MonoBehaviour
 {
-    public List<ItemAmount> storedItems;
+    [SerializeField]
+    private List<ItemAmount> storedItems;
+    [SerializeField]
+    private float secondsPerArrow;
+
+    [SerializeField]
+    private int minArrowAmount;
+    public int MinArrowAmount
+    {
+        get => minArrowAmount;
+    }
+
+    [SerializeField]
+    private int maxArrowAmount;
+    public int MaxArrowAmount
+    {
+        get => minArrowAmount;
+    }
+
+    public float SecondsPerArrow
+    {
+        get => secondsPerArrow;
+    }
+
+    public List<ItemAmount> StoredItems
+    {
+        get => storedItems;
+        set
+        {
+            storedItems = value;
+        }
+    }
+
+    private void Awake()
+    {
+        if (secondsPerArrow == 0)
+            secondsPerArrow = 0.35F;
+    }
 
     public Item GetRandomItem()
     {

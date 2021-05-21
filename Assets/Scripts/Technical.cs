@@ -16,6 +16,11 @@ public static class Technical
         return Resources.Load<Item>($"Prefabs/Inventory items/{itemName}");
     }
 
+    public static Collider2D[] GetCollidersInPosition(Vector3 position)
+    {
+        return Physics2D.OverlapCircleAll(position, 0.1F);
+    }
+
     public static string GetItemNameWithoutAdditInfo(this string name)
     {
         return name.Split(new[] { ' ', '(' })[0];
