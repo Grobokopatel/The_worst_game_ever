@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CraftButton : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class CraftButton : MonoBehaviour
             Debug.Log($"Количество брёвен после крафта {player.GetAmountOfItem("Log")}");
             Debug.Log($"Количество камней после крафта {player.GetAmountOfItem("Rock")}");
             CraftingMenu.craftingMenu.UpdateItemsAmount();
+            GetComponent<Button>().interactable = false;
+            Destroy(gameObject, 0.05F);
         }
         else
         {

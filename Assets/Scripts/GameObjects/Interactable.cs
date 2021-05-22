@@ -39,7 +39,7 @@ public abstract class Interactable : MonoBehaviour
         if (player && ShouldHighlight(player) && player.CurrentInteractable == this)
             OnPlayerExit(player);
     }
-
+    
     public abstract void Interact(Player player);
 
     protected event Action<Player> OnPlayerEntry;
@@ -49,9 +49,6 @@ public abstract class Interactable : MonoBehaviour
     {
         return true;
     }
-
-    protected virtual void Initialize()
-    { }
 
     protected virtual void Awake()
     {
@@ -67,7 +64,5 @@ public abstract class Interactable : MonoBehaviour
             Sprite.color = defaultColor;
             player.CurrentInteractable = null;
         };
-
-        Initialize();
     }
 }

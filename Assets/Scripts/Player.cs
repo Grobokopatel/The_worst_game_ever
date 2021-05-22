@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +21,11 @@ public class Player : MonoBehaviour
     private Bobber bobber;
     [SerializeField]
     private GameObject boatPrefab;
+    [SerializeField]
+    private GameObject inventoryCanvas;
+    [SerializeField]
+    private GameObject itemPrefab;
+
     public PlayerState State
     {
         get => (PlayerState)animator.GetInteger("State");
@@ -59,9 +63,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        AddDeltaItems("Log", 5);
-        AddDeltaItems("Rock", 5);
-        AddDeltaItems("FishingRod", 1);
+        //AddDeltaItems("Log", 5);
+        //AddDeltaItems("Rock", 5);
+        //AddDeltaItems("FishingRod", 1);
         player = this;
         collider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -135,36 +139,58 @@ public class Player : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement, speed * Time.deltaTime);
     }
 
-    private readonly Dictionary<Item, int> inventory = new Dictionary<Item, int>();
+    private readonly Dictionary<Item, (int quantity, GameObject itemObject)> inventory = new Dictionary<Item, (int, GameObject)>();
 
     public void AddDeltaItems(Item item, int deltaAmount)
     {
+        int newQuantity;
         if (item.ItemName == "Лодка")
         {
             var playerPosition = transform.position;
             playerPosition.x += 2;
             playerPosition.y = -7.316F;
             Instantiate(boatPrefab, playerPosition, transform.rotation);
+            return;
         }
         else if (inventory.ContainsKey(item))
-            inventory[item] += deltaAmount;
+        {
+            newQuantity = inventory[item].quantity + deltaAmount;
+        }
         else
-            inventory[item] = deltaAmount;
+        {
+            newQuantity = deltaAmount;
+            inventory[item] = (deltaAmount, null);
+        }
+
+        if (newQuantity == 0)
+        {
+            if (inventory[item].itemObject != null)
+                Destroy(inventory[item].itemObject);
+            inventory[item] = (0, null);
+            return;
+        }
+        else
+        {
+            if (inventory[item].itemObject == null)
+            {
+                inventory[item] = (newQuantity, Instantiate(itemPrefab, inventoryCanvas.transform));
+                inventory[item].itemObject.GetComponentsInChildren<Image>()[1].sprite = item.Icon;
+            }
+            else
+                inventory[item] = (newQuantity, inventory[item].itemObject);
+        }
+        inventory[item].itemObject.GetComponentInChildren<Text>().text = newQuantity == 1 ? "" : newQuantity.ToString();
     }
 
     public void AddDeltaItems(string itemName, int deltaAmount)
     {
-        var item = Technical.GetItem(itemName);
-        if (inventory.ContainsKey(item))
-            inventory[item] += deltaAmount;
-        else
-            inventory[item] = deltaAmount;
+        AddDeltaItems(Technical.GetItem(itemName), deltaAmount);
     }
 
     public int GetAmountOfItem(Item item)
     {
         if (inventory.ContainsKey(item))
-            return inventory[item];
+            return inventory[item].quantity;
 
         AddDeltaItems(item, 0);
         return 0;
@@ -174,7 +200,7 @@ public class Player : MonoBehaviour
     {
         var item = Technical.GetItem(itemName);
         if (inventory.ContainsKey(item))
-            return inventory[item];
+            return inventory[item].quantity;
 
         AddDeltaItems(item, 0);
         return 0;

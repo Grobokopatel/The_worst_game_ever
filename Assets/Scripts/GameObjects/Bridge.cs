@@ -17,8 +17,9 @@ public class Bridge : Interactable
     private Sprite cross;
     private BoxCollider2D collider;
     private bool isRepaired = false;
-    protected override void Initialize()
+    protected override void Awake()
     {
+        base.Awake();
         OnPlayerEntry += player =>
         {
             materials.SetActive(true);
@@ -48,9 +49,10 @@ public class Bridge : Interactable
     {
         if(Player.player.GetAmountOfItem("Log")>=3 && Player.player.GetAmountOfItem("Axe")>=1)
         {
+            Player.player.AddDeltaItems("Log", -3);
+
             materials.SetActive(false);
             Sprite.color = new Color(255,255,255,1);
-            defaultColor = Sprite.color;
             enabled = false;
             isRepaired = true;
 

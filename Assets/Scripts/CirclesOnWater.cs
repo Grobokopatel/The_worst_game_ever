@@ -5,6 +5,7 @@ using System;
 
 public class CirclesOnWater : MonoBehaviour
 {
+    public static bool isCasualDifficultyOn;
     [SerializeField]
     private List<ItemAmount> storedItems;
     [SerializeField]
@@ -26,16 +27,12 @@ public class CirclesOnWater : MonoBehaviour
 
     public float SecondsPerArrow
     {
-        get => secondsPerArrow;
+        get => isCasualDifficultyOn ? 1 : secondsPerArrow;
     }
 
     public List<ItemAmount> StoredItems
     {
         get => storedItems;
-        set
-        {
-            storedItems = value;
-        }
     }
 
     private void Awake()

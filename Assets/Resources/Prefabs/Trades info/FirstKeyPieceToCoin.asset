@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d83f6493af2f534588e485a26d3839a, type: 3}
-  m_Name: RockToCoin
+  m_Name: FirstKeyPieceToCoin
   m_EditorClassIdentifier: 
   Materials:
-  - item: {fileID: 11400000, guid: b7d26f266a2d6df4c9b5961cba74b001, type: 2}
+  - item: {fileID: 11400000, guid: 3de0751698176e845859dde4b3f254f9, type: 2}
     amount: 1
   Results:
   - item: {fileID: 11400000, guid: 4a8818b14528b34459df7127d89d5441, type: 2}
-    amount: 2
+    amount: 5

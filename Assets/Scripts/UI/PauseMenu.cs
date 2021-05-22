@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class PauseMenu : MonoBehaviour
                 Pause();
     }
 
-    private void Resume()
+    public void Resume()
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1;
@@ -33,7 +34,7 @@ public class PauseMenu : MonoBehaviour
         Player.player.enabled = true;
     }
 
-    private void Pause()
+    public void Pause()
     {
         if (!allUI.GetComponentsInChildren<Canvas>().Any(canvas => canvas.gameObject.activeInHierarchy))
         {
@@ -42,5 +43,11 @@ public class PauseMenu : MonoBehaviour
             GameIsPaused = true;
             Player.player.enabled = false;
         }
+    }
+
+    public void ChangeDifficulty(Text text)
+    {
+        CirclesOnWater.isCasualDifficultyOn = !CirclesOnWater.isCasualDifficultyOn;
+        text.text = $"Сложность: {(CirclesOnWater.isCasualDifficultyOn ? "Казуальная" : "Нормальная")}";
     }
 }

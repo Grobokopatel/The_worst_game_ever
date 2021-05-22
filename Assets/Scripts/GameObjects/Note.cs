@@ -7,8 +7,9 @@ public class Note : Interactable
     [SerializeField]
     private GameObject noteText;
 
-    protected override void Initialize()
+    protected override void Awake()
     {
+        base.Awake();
         enabled = false;
     }
 

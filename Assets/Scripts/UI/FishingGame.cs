@@ -17,7 +17,7 @@ public class FishingGame : MonoBehaviour
     public static KeyCode[] arrowsKeyCodes = Enumerable.Range(273, 4).Select(number => (KeyCode)number).ToArray();
     private float timeToCaught;
     private float leftTime;
-    private Timer timer = new Timer(new System.Random().Next(3, 6));
+    private Timer timer = new Timer(new System.Random().Next(0));
     private Color currentButtonColor = Color.red;
     [SerializeField]
     private Image leftPartProgressBar;
@@ -37,10 +37,11 @@ public class FishingGame : MonoBehaviour
 
         var rng = new System.Random();
 
-        if (currentCircles.MaxArrowAmount == 0)
-            arrowNumber = rng.Next(12, 20);
-        else
-            arrowNumber = rng.Next(currentCircles.MinArrowAmount, currentCircles.MaxArrowAmount);
+        arrowNumber = 0;
+        //if (currentCircles.MaxArrowAmount == 0)
+        //    arrowNumber = rng.Next(12, 20);
+        //else
+        //    arrowNumber = rng.Next(currentCircles.MinArrowAmount, currentCircles.MaxArrowAmount);
 
         for (var i = 0; i < arrowNumber; ++i)
         {
@@ -68,12 +69,12 @@ public class FishingGame : MonoBehaviour
             arrowsInfo.Add((arrow, key));
         }
         currentArrowInfo = arrowsInfo.FirstOrDefault();
-        currentArrowIndex = 1;
-        currentArrowInfo.arrow.GetComponent<Image>().color = currentButtonColor;
+        currentArrowIndex = 0;
+        //currentArrowInfo.arrow.GetComponent<Image>().color = currentButtonColor;
         leftPartProgressBar.enabled = true;
         rightPartProgressBar.enabled = true;
 
-        timeToCaught = currentCircles.SecondsPerArrow * arrowNumber;
+        timeToCaught = 5F + 0*currentCircles.SecondsPerArrow * arrowNumber;
         leftTime = timeToCaught;
     }
 
@@ -116,12 +117,12 @@ public class FishingGame : MonoBehaviour
             Player.player.State = PlayerState.Idle;
         }
 
-        if (currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
+        if (true || currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
         {
-            if (Input.GetKeyDown(currentArrowInfo.key))
+            if (true || Input.GetKeyDown(currentArrowInfo.key))
             {
                 Debug.Log("Нужная клавиша");
-                currentArrowInfo.arrow.GetComponent<Image>().color = Color.white;
+                //currentArrowInfo.arrow.GetComponent<Image>().color = Color.white;
                 if (currentArrowIndex != arrowsInfo.Count)
                 {
                     currentArrowInfo = arrowsInfo[currentArrowIndex];
