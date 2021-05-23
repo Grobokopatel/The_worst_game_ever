@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d83f6493af2f534588e485a26d3839a, type: 3}
   m_Name: CoinsToLog
   m_EditorClassIdentifier: 
+  sortOrder: 7
+  shouldNotLoadDuringInitialization: 0
   Materials:
   - item: {fileID: 11400000, guid: 4a8818b14528b34459df7127d89d5441, type: 2}
     amount: 2

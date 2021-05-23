@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class Bridge : Interactable
     private Sprite cross;
     private BoxCollider2D collider;
     private bool isRepaired = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,12 +42,12 @@ public class Bridge : Interactable
         mark.sprite = Player.player.GetAmountOfItem("Axe") >= 1 ? checkMark : cross;
     }
 
-    protected override bool ShouldHighlight(Player player)
+    protected override bool ShouldHighlight()
     {
         return !isRepaired;
     }
 
-    public override void Interact(Player player)
+    public override void Interact()
     {
         if(Player.player.GetAmountOfItem("Log")>=3 && Player.player.GetAmountOfItem("Axe")>=1)
         {

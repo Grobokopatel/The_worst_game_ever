@@ -16,7 +16,7 @@ public abstract class Interactable : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         var player = collision.GetComponent<Player>();
-        if (player && ShouldHighlight(player))
+        if (player && ShouldHighlight())
         {
             if (player.CurrentInteractable != null)
                 player.CurrentInteractable.OnPlayerExit(player);
@@ -28,7 +28,7 @@ public abstract class Interactable : MonoBehaviour
     {
         var player = collision.GetComponent<Player>();
 
-        if (player && ShouldHighlight(player) && player.CurrentInteractable == null)
+        if (player && ShouldHighlight() && player.CurrentInteractable == null)
             OnPlayerEntry(player);
     }
 
@@ -36,16 +36,16 @@ public abstract class Interactable : MonoBehaviour
     {
         var player = collision.GetComponent<Player>();
 
-        if (player && ShouldHighlight(player) && player.CurrentInteractable == this)
+        if (player && ShouldHighlight() && player.CurrentInteractable == this)
             OnPlayerExit(player);
     }
     
-    public abstract void Interact(Player player);
+    public abstract void Interact();
 
     protected event Action<Player> OnPlayerEntry;
     protected event Action<Player> OnPlayerExit;
 
-    protected virtual bool ShouldHighlight(Player player)
+    protected virtual bool ShouldHighlight()
     {
         return true;
     }

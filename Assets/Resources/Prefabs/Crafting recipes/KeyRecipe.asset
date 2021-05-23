@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d83f6493af2f534588e485a26d3839a, type: 3}
   m_Name: KeyRecipe
   m_EditorClassIdentifier: 
+  sortOrder: 5
+  shouldNotLoadDuringInitialization: 1
   Materials:
   - item: {fileID: 11400000, guid: 3de0751698176e845859dde4b3f254f9, type: 2}
     amount: 1

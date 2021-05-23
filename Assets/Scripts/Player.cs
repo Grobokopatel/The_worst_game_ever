@@ -63,9 +63,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        //AddDeltaItems("Saw", 1);
         //AddDeltaItems("Log", 5);
-        //AddDeltaItems("Rock", 5);
-        //AddDeltaItems("FishingRod", 1);
+        AddDeltaItems("ShovelRecipe", 1);
         player = this;
         collider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -89,10 +89,8 @@ public class Player : MonoBehaviour
         if (State != PlayerState.InBoat)
             State = PlayerState.Idle;
         else if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-            && Technical.GetCollidersInPosition(transform.position + transform.up + 0.75F * transform.right).Length >= 1
-            && Technical.GetCollidersInPosition(transform.position + transform.up - 0.75F * transform.right).Length >= 1
-            && Technical.GetCollidersInPosition(transform.position + transform.up).Length >= 1
-            )
+            && Enumerable.Range(0, 3)
+            .All(number => Technical.GetCollidersInPosition(transform.position + transform.up + (0.75F - number * 0.75F) * transform.right).Length >= 1))
         {
             Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>().flipX = !sprite.flipX;
             State = PlayerState.Idle;
@@ -100,7 +98,7 @@ public class Player : MonoBehaviour
         }
 
         if (CurrentInteractable != null && Input.GetKeyDown(KeyCode.E))
-            CurrentInteractable.Interact(this);
+            CurrentInteractable.Interact();
 
         if (Input.GetButton("Horizontal"))
         {
@@ -111,20 +109,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Swim()
+    public void Swim()
     {
-        Move(false);
+        Move(false, Input.GetAxis("Horizontal"));
     }
 
-    private void Walk()
+    public void Walk()
     {
         State = PlayerState.Run;
-        Move(true);
+        Move(true, Input.GetAxis("Horizontal"));
     }
 
-    private void Move(bool shouldCheckOnCollidersAhead)
+    public void Move(bool shouldCheckOnCollidersAhead, float scale)
     {
-        var deltaMovement = transform.right * Input.GetAxis("Horizontal");
+        var deltaMovement = scale * transform.right;
         sprite.flipX = deltaMovement.x < 0;
 
         var colliderOffset = collider.offset;
@@ -152,7 +150,13 @@ public class Player : MonoBehaviour
             Instantiate(boatPrefab, playerPosition, transform.rotation);
             return;
         }
-        else if (inventory.ContainsKey(item))
+
+        if (item.ItemName == "Вторая часть ключа" && !Shop.WasCanvasOpenedBefore)
+        {
+            CraftingMenu.craftingMenu.AddRecipeOnCanvas(Resources.Load<CraftingRecipe>("Prefabs/Crafting recipes/KeyRecipe"));
+        }
+
+        if (inventory.ContainsKey(item))
         {
             newQuantity = inventory[item].quantity + deltaAmount;
         }

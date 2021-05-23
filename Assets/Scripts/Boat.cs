@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Boat : Interactable
 {
-    public override void Interact(Player player)
+    public override void Interact()
     {
-        player.transform.position = transform.position;
+        Player.player.transform.position = transform.position;
         Destroy(gameObject);
-        player.State = PlayerState.InBoat;
+        Player.player.State = PlayerState.InBoat;
     }
 }

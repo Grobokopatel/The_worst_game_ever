@@ -140,7 +140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   fishingGamePrefab: {fileID: 7293265199432827179, guid: 551cc295ad27a0a418eaebd46b0722b5, type: 3}
-  boat: {fileID: 6158104239728456128, guid: 128d9f41d40ead94f9ab714fe00ec821, type: 3}
+  boatPrefab: {fileID: 6158104239728456128, guid: 128d9f41d40ead94f9ab714fe00ec821, type: 3}
+  inventoryCanvas: {fileID: 4273294941805590954, guid: 4e1162253eb1e704292dedc1d90baa8f, type: 3}
+  itemPrefab: {fileID: 4796803969128460841, guid: 73776a95db59a564a804ec741775c616, type: 3}
 --- !u!95 &1581515277
 Animator:
   serializedVersion: 3

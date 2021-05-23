@@ -114,7 +114,10 @@ public class FishingGame : MonoBehaviour
         if (leftTime <= 0)
         {
             Destroy(gameObject);
-            Player.player.State = PlayerState.Idle;
+            StartCoroutine(Technical.WaitThenInvokeMethod(0, () =>
+            {
+                Player.player.State = PlayerState.Idle;
+            }));
         }
 
         if (true || currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
@@ -133,13 +136,19 @@ public class FishingGame : MonoBehaviour
                 {
                     var prize = currentCircles.GetRandomItem();
                     Player.player.AddDeltaItems(prize, 1);
-                    Player.player.State = PlayerState.Idle;
+                    StartCoroutine(Technical.WaitThenInvokeMethod(0, () =>
+                    {
+                        Player.player.State = PlayerState.Idle;
+                    }));
                     Destroy(gameObject);
                 }
             }
             else
             {
-                Player.player.State = PlayerState.Idle;
+                StartCoroutine(Technical.WaitThenInvokeMethod(0, () =>
+                {
+                    Player.player.State = PlayerState.Idle;
+                }));
                 Debug.Log("Не та клавиша");
                 Destroy(gameObject);
             }

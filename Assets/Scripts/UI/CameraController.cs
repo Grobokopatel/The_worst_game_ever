@@ -10,8 +10,6 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private VideoPlayer intro;
 
-    private bool isIntroPlaying = true;
-
     [SerializeField]
     private float speed = 2.0F;
 
@@ -19,8 +17,8 @@ public class CameraController : MonoBehaviour
     private Transform target;
 
     [SerializeField]
-    private float yOffset;
-    private float zOffset = -10F;
+    private float yCoord = -4.982996F;
+    private const float zOffset = -10F;
     private float xOffset;
 
     public float XOffset
@@ -41,9 +39,9 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        var offsetVector = new Vector3(xOffset, yOffset, zOffset);
+        var offsetVector = new Vector3(xOffset, 0, zOffset);
         var offsettedTarget = target.position + offsetVector;
-        offsettedTarget.y = -4.982996F;
+        offsettedTarget.y = yCoord;
 
         transform.position = Vector3.Lerp(transform.position, offsettedTarget, speed * Time.deltaTime);
     }

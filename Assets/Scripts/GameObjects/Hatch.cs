@@ -6,15 +6,15 @@ public class Hatch : Interactable
 {
     public bool isDugOut = false;
 
-    public override void Interact(Player player)
+    public override void Interact()
     {
-        if(player.GetAmountOfItem("Key")>=1)
+        if(Player.player.GetAmountOfItem("Key")>=1)
         {
             Debug.Log("Конец игры");
         }
     }
 
-    protected override bool ShouldHighlight(Player player)
+    protected override bool ShouldHighlight()
     {
         return isDugOut;
     }

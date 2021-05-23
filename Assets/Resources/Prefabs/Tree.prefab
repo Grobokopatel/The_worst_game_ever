@@ -71,7 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bff3a74efaa9fa4b816cd0efa701ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: 478654624995799445, guid: b12393135e1ba4143a5033a3020d62e4, type: 3}
+  objectToSpawn: {fileID: 478654624995799445, guid: b12393135e1ba4143a5033a3020d62e4, type: 3}
+  itemToDestroyThis: {fileID: 11400000, guid: 3378b5520aeff18428e3d12efd4ee039, type: 2}
 --- !u!1 &8025468917525941227
 GameObject:
   m_ObjectHideFlags: 0

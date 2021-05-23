@@ -4,12 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
+using System.Linq;
 
-public class CraftingMenu : MonoBehaviour
+public class CraftingMenu : ExchangeMenu
 {
-    [SerializeField]
-    private CameraController cameraController;
-
     [SerializeField]
     private GameObject craftPrefab;
 
@@ -18,9 +16,6 @@ public class CraftingMenu : MonoBehaviour
 
     [SerializeField]
     private GameObject craftHolder;
-
-    [SerializeField]
-    private GameObject materialsHolder;
 
     private readonly List<(Text, Item)> allMaterials = new List<(Text, Item)>();
 
@@ -40,21 +35,13 @@ public class CraftingMenu : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            gameObject.SetActive(false);
-            Player.player.enabled = true;
-            cameraController.XOffset = 0;
-        }
-    }
-
     private void Awake()
     {
         gameObject.SetActive(false);
         craftingMenu = this;
-        var craftingRecipes = Resources.LoadAll<CraftingRecipe>("Prefabs/Crafting recipes");
+        var craftingRecipes = Resources.LoadAll<CraftingRecipe>("Prefabs/Crafting recipes")
+            .Where(recipe => !recipe.ShouldNotLoadDuringInitialization)
+            .OrderBy(recipe => recipe.SortOrder);
         foreach (var craftingRecipe in craftingRecipes)
         {
             AddRecipeOnCanvas(craftingRecipe);

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d83f6493af2f534588e485a26d3839a, type: 3}
   m_Name: FishToCoin
   m_EditorClassIdentifier: 
+  sortOrder: 2
+  shouldNotLoadDuringInitialization: 0
   Materials:
   - item: {fileID: 11400000, guid: 33198e1a0e0699d4ea1268e447fd1e81, type: 2}
     amount: 1

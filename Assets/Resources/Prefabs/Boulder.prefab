@@ -153,4 +153,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bff3a74efaa9fa4b816cd0efa701ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: 478654624995799445, guid: 3115c8069cb16ff47b42beb2130caf23, type: 3}
+  objectToSpawn: {fileID: 478654624995799445, guid: 3115c8069cb16ff47b42beb2130caf23, type: 3}
+  itemToDestroyThis: {fileID: 11400000, guid: 5bdc3b6c590429f428d1842c2c7f24c7, type: 2}

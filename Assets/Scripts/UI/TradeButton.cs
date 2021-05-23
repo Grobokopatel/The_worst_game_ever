@@ -35,10 +35,10 @@ public class TradeButton : MonoBehaviour
     public void OnClick()
     {
         var player = Player.player;
-        if (TradeInfo.CanCraft(player))
+        if (TradeInfo.CanCraft())
         {
             Debug.Log($"Ты скрафтил {TradeInfo.Results[0].Item.ItemName}");
-            TradeInfo.Craft(player);
+            TradeInfo.Craft();
             Debug.Log($"Количество брёвен после крафта {player.GetAmountOfItem("Log")}");
             Debug.Log($"Количество камней после крафта {player.GetAmountOfItem("Rock")}");
             TradingMenu.tradingMenu.UpdateItemsAmount();

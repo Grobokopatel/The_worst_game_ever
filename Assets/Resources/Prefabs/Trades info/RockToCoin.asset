@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d83f6493af2f534588e485a26d3839a, type: 3}
   m_Name: RockToCoin
   m_EditorClassIdentifier: 
+  sortOrder: 1
+  shouldNotLoadDuringInitialization: 0
   Materials:
   - item: {fileID: 11400000, guid: b7d26f266a2d6df4c9b5961cba74b001, type: 2}
     amount: 1

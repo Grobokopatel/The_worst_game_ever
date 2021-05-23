@@ -8,30 +8,23 @@ public class Shop : Interactable
     private TradingMenu tradingMenu;
     [SerializeField]
     private CameraController cameraController;
+    public static bool WasCanvasOpenedBefore = false;
 
-    public override void Interact(Player player)
+    public override void Interact()
     {
+        StartCoroutine(Technical.WaitThenInvokeMethod(0, () =>
+        {
+            Player.player.State = PlayerState.Idle;
+            Player.player.enabled = false;
+        }));
+
         tradingMenu.gameObject.SetActive(true);
         tradingMenu.UpdateItemsAmount();
-        Player.player.enabled = false;
         cameraController.XOffset = 3.5F;
-        
-        #region
-        /*GetComponent<FirstPersonController>().enabled = !canvas.active;
-        if (canvas.active)
-        {
-            LayoutRebuilder.ForceRebuildLayoutImmediate(holder.GetComponent<RectTransform>());
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }*/
 
-        /*for (int i = 0; i < GlobalItemsList.gl.allItem1sList.Count; i++)
+        if (!WasCanvasOpenedBefore)
         {
-            if (Input.GetKeyDown(i.ToString()))
-            {
-                AddItem1(GlobalItemsList.gl.allItem1sList[i].Clone());
-            }
-        }*/
-        #endregion
+            CraftingMenu.craftingMenu.AddRecipeOnCanvas(Resources.Load<CraftingRecipe>("Prefabs/Crafting recipes/KeyRecipe"));
+        }
     }
 }

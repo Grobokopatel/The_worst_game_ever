@@ -10,7 +10,8 @@ public class PauseMenu : MonoBehaviour
     private GameObject pauseMenuUI;
     [SerializeField]
     private GameObject allUI;
-
+    [SerializeField]
+    private GameObject startTip;
     public static bool GameIsPaused
     {
         get;
@@ -20,17 +21,17 @@ public class PauseMenu : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            if (GameIsPaused)
+            if (pauseMenuUI.gameObject.activeInHierarchy)
                 Resume();
             else
                 Pause();
+        
     }
 
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1;
-        GameIsPaused = false;
         Player.player.enabled = true;
     }
 
@@ -38,9 +39,9 @@ public class PauseMenu : MonoBehaviour
     {
         if (!allUI.GetComponentsInChildren<Canvas>().Any(canvas => canvas.gameObject.activeInHierarchy))
         {
+            startTip.SetActive(false);
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0;
-            GameIsPaused = true;
             Player.player.enabled = false;
         }
     }
@@ -49,5 +50,10 @@ public class PauseMenu : MonoBehaviour
     {
         CirclesOnWater.isCasualDifficultyOn = !CirclesOnWater.isCasualDifficultyOn;
         text.text = $"Сложность: {(CirclesOnWater.isCasualDifficultyOn ? "Казуальная" : "Нормальная")}";
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

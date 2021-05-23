@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TradingMenu : MonoBehaviour
+public class TradingMenu : ExchangeMenu
 {
-    [SerializeField]
-    private CameraController cameraController;
     [SerializeField]
     private GameObject tradePrefab;
     [SerializeField]
@@ -22,29 +21,18 @@ public class TradingMenu : MonoBehaviour
         foreach (var material in allMaterials)
         {
             var playerHas = Player.player.GetAmountOfItem(material.Item2);
-            //Debug.Log(material.Item1.text.Split('/')[2]);
             var needed = int.Parse(material.Item1.text.Split(new[] { '/', '<', '>' }, StringSplitOptions.RemoveEmptyEntries)[2]);
             var color = playerHas < needed ? "red" : "white";
             material.Item1.text = $"<color={color}>{playerHas}/{needed}</color>";
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            gameObject.SetActive(false);
-            Player.player.enabled = true;
-            cameraController.XOffset = 0;
-        }
-    }
 
     private void Awake()
     {
-        
         gameObject.SetActive(false);
         tradingMenu = this;
-        var tradesInfo = Resources.LoadAll<CraftingRecipe>("Prefabs/Trades info");
+        var tradesInfo = Resources.LoadAll<CraftingRecipe>("Prefabs/Trades info").OrderBy(recipe => recipe.SortOrder);
         foreach (var tradeInfo in tradesInfo)
         {
             var tradeObject = Instantiate(tradePrefab, tradeHolder.transform);

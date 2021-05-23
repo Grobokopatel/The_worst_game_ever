@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d83f6493af2f534588e485a26d3839a, type: 3}
   m_Name: ShovelRecipe
   m_EditorClassIdentifier: 
+  sortOrder: 0
+  shouldNotLoadDuringInitialization: 1
   Materials:
   - item: {fileID: 11400000, guid: 61429b1151d16dd44aae8da1aaf22455, type: 2}
     amount: 2

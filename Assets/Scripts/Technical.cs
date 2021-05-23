@@ -7,7 +7,7 @@ public static class Technical
 {
     public static IEnumerator WaitThenInvokeMethod(float seconds, Action whatToDoAfterDelay)
     {
-        yield return new WaitForSeconds(seconds);
+        yield return seconds == 0 ? null : new WaitForSeconds(seconds);
         whatToDoAfterDelay();
     }
 

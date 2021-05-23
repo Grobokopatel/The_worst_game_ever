@@ -13,8 +13,14 @@ public class Note : Interactable
         enabled = false;
     }
 
-    public override void Interact(Player player)
+    public override void Interact()
     {
+        StartCoroutine(Technical.WaitThenInvokeMethod(0, () =>
+        {
+            Player.player.State = PlayerState.Idle;
+            Player.player.enabled = false;
+        }));
+
         noteText.SetActive(true);
         enabled = true;
     }
@@ -25,6 +31,7 @@ public class Note : Interactable
         {
             enabled = false;
             noteText.SetActive(false);
+            Player.player.enabled = true;
         }
     }
 }

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Collectable : Interactable
 {
-    public override void Interact(Player player)
+    public override void Interact()
     {
         var resource = Technical.GetItem(gameObject.name.GetItemNameWithoutAdditInfo());
-        player.AddDeltaItems(resource, 1);
+        Player.player.AddDeltaItems(resource, 1);
         Destroy(gameObject);
-        Debug.Log($"Количество {resource} в инвентаре: {player.GetAmountOfItem(resource)}");
+        Debug.Log($"Количество {resource} в инвентаре: {Player.player.GetAmountOfItem(resource)}");
     }
 }

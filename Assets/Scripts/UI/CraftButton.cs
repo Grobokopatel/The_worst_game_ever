@@ -15,11 +15,11 @@ public class CraftButton : MonoBehaviour
     public void OnClick()
     {
         var player = Player.player;
-        if (CraftingRecipe.CanCraft(player))
+        if (CraftingRecipe.CanCraft())
         {
             Debug.Log($"Ты скрафтил {CraftingRecipe.Results[0].Item.ItemName}");
-            CraftingRecipe.Craft(player);
-            Debug.Log($"Количество брёвен после крафта {player.GetAmountOfItem("Log")}");
+            CraftingRecipe.Craft();
+            Debug.Log($"Количество пил после крафта {player.GetAmountOfItem("Saw")}");
             Debug.Log($"Количество камней после крафта {player.GetAmountOfItem("Rock")}");
             CraftingMenu.craftingMenu.UpdateItemsAmount();
             GetComponent<Button>().interactable = false;

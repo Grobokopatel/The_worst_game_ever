@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toSpawn: {fileID: 0}
+  itemToDestroyThis: {fileID: 11400000, guid: 146642aae731fe944b717b6a909ca20f, type: 2}
 --- !u!1 &1796441085644536304
 GameObject:
   m_ObjectHideFlags: 0

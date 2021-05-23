@@ -24,25 +24,37 @@ public struct ItemAmount
     }
 }
 
-
-
 [CreateAssetMenu]
 public class CraftingRecipe : ScriptableObject
 {
+    [SerializeField]
+    private int sortOrder;
+    public int SortOrder
+    {
+        get => sortOrder;
+    }
+
+    [SerializeField]
+    private bool shouldNotLoadDuringInitialization;
+    public bool ShouldNotLoadDuringInitialization
+    {
+        get => shouldNotLoadDuringInitialization;
+    }
+
     public List<ItemAmount> Materials;
     public List<ItemAmount> Results;
 
-    public bool CanCraft(Player player)
+    public bool CanCraft()
     {
-        return Materials.All(material => player.GetAmountOfItem(material.Item) >= material.Amount);
+        return Materials.All(material => Player.player.GetAmountOfItem(material.Item) >= material.Amount);
     }
 
-    public void Craft(Player player)
+    public void Craft()
     {
         foreach(var material in Materials)
-            player.AddDeltaItems(material.Item, -material.Amount);
+            Player.player.AddDeltaItems(material.Item, -material.Amount);
 
         foreach (var result in Results)
-            player.AddDeltaItems(result.Item, result.Amount);
+            Player.player.AddDeltaItems(result.Item, result.Amount);
     }
 }
