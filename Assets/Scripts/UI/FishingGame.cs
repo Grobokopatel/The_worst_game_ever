@@ -30,18 +30,16 @@ public class FishingGame : MonoBehaviour
 
     public void InstantiateGame()
     {
-
         currentCircles = Technical.GetCollidersInPosition(playersBobber.transform.position)
          .Select(collider => collider.gameObject.GetComponent<CirclesOnWater>())
          .First(component => component != null);
 
         var rng = new System.Random();
 
-        arrowNumber = 0;
-        //if (currentCircles.MaxArrowAmount == 0)
-        //    arrowNumber = rng.Next(12, 20);
-        //else
-        //    arrowNumber = rng.Next(currentCircles.MinArrowAmount, currentCircles.MaxArrowAmount);
+        if (currentCircles.MaxArrowAmount == 0)
+            arrowNumber = rng.Next(12, 20);
+        else
+            arrowNumber = rng.Next(currentCircles.MinArrowAmount, currentCircles.MaxArrowAmount);
 
         for (var i = 0; i < arrowNumber; ++i)
         {
@@ -69,12 +67,12 @@ public class FishingGame : MonoBehaviour
             arrowsInfo.Add((arrow, key));
         }
         currentArrowInfo = arrowsInfo.FirstOrDefault();
-        currentArrowIndex = 0;
-        //currentArrowInfo.arrow.GetComponent<Image>().color = currentButtonColor;
+        currentArrowIndex = 1;
+        currentArrowInfo.arrow.GetComponent<Image>().color = currentButtonColor;
         leftPartProgressBar.enabled = true;
         rightPartProgressBar.enabled = true;
 
-        timeToCaught = 5F + 0*currentCircles.SecondsPerArrow * arrowNumber;
+        timeToCaught = currentCircles.SecondsPerArrow * arrowNumber;
         leftTime = timeToCaught;
     }
 
@@ -114,18 +112,15 @@ public class FishingGame : MonoBehaviour
         if (leftTime <= 0)
         {
             Destroy(gameObject);
-            StartCoroutine(Technical.WaitThenInvokeMethod(0, () =>
-            {
-                Player.player.State = PlayerState.Idle;
-            }));
+            Player.player.State = PlayerState.Idle;
         }
 
-        if (true || currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
+        if (currentArrowIndex <= arrowsInfo.Count && arrowsKeyCodes.Any(keyCode => Input.GetKeyDown(keyCode)))
         {
-            if (true || Input.GetKeyDown(currentArrowInfo.key))
+            if (Input.GetKeyDown(currentArrowInfo.key))
             {
                 Debug.Log("Нужная клавиша");
-                //currentArrowInfo.arrow.GetComponent<Image>().color = Color.white;
+                currentArrowInfo.arrow.GetComponent<Image>().color = Color.white;
                 if (currentArrowIndex != arrowsInfo.Count)
                 {
                     currentArrowInfo = arrowsInfo[currentArrowIndex];
@@ -136,19 +131,14 @@ public class FishingGame : MonoBehaviour
                 {
                     var prize = currentCircles.GetRandomItem();
                     Player.player.AddDeltaItems(prize, 1);
-                    StartCoroutine(Technical.WaitThenInvokeMethod(0, () =>
-                    {
-                        Player.player.State = PlayerState.Idle;
-                    }));
+
+                    Player.player.State = PlayerState.Idle;
                     Destroy(gameObject);
                 }
             }
             else
             {
-                StartCoroutine(Technical.WaitThenInvokeMethod(0, () =>
-                {
-                    Player.player.State = PlayerState.Idle;
-                }));
+                Player.player.State = PlayerState.Idle;
                 Debug.Log("Не та клавиша");
                 Destroy(gameObject);
             }

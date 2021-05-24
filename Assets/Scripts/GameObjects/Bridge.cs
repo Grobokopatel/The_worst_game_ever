@@ -55,6 +55,7 @@ public class Bridge : Interactable
 
             materials.SetActive(false);
             Sprite.color = new Color(255,255,255,1);
+            defaultColor = new Color(255, 255, 255, 1);
             enabled = false;
             isRepaired = true;
 

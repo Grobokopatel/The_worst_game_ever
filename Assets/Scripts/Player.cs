@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
             switch (value)
             {
                 case PlayerState.Idle:
+                    enabled = true;
                     var newPosition = player.transform.position;
                     newPosition.y = ConstantYPosition;
                     transform.position = newPosition;
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
                     break;
 
                 case PlayerState.Fishing:
+                    enabled = false;
                     Instantiate(fishingGamePrefab);
                     break;
             }
@@ -63,9 +65,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        //AddDeltaItems("Saw", 1);
+       // AddDeltaItems("FishingRod", 1);
         //AddDeltaItems("Log", 5);
-        AddDeltaItems("ShovelRecipe", 1);
+       // AddDeltaItems("ShovelRecipe", 1);
         player = this;
         collider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -76,13 +78,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod") >= 1 && State != PlayerState.InBoat) || State == PlayerState.Fishing)
+        if (Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod") >= 1 && State != PlayerState.InBoat)
         {
-            if (State != PlayerState.Fishing)
-            {
-                State = PlayerState.Fishing;
-            }
-
+            State = PlayerState.Fishing;
             return;
         }
 

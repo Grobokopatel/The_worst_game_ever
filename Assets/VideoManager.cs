@@ -22,11 +22,11 @@ public class VideoManager : MonoBehaviour
         if (Input.anyKey)
         {
             skipOption.SetActive(true);
-            greenRing.fillAmount += 0.0015F;
+            greenRing.fillAmount += 0.0070F;
         }
         else
         {
-            greenRing.fillAmount -= 0.005F;
+            greenRing.fillAmount -= 0.03F;
             if (greenRing.fillAmount <= 0)
                 skipOption.SetActive(false);
         }
