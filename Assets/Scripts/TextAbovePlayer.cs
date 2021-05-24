@@ -12,9 +12,6 @@ public class TextAbovePlayer : MonoBehaviour
         if (TimeToDisappear <= 0)
             Destroy(gameObject);
 
-        transform.Translate(transform.up * 0.01F);
-        //var color = Text.color;
-        //color.a -= 0.01f;
-        //Text.color = color;
+        transform.Translate(transform.up * 0.5F);
     }
 }
