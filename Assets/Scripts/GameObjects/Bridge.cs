@@ -40,6 +40,7 @@ public class Bridge : Interactable
         amount.text = $"<color={color}>{playerHas}/3</color>";
 
         mark.sprite = Player.player.GetAmountOfItem("Axe") >= 1 ? checkMark : cross;
+        gameObject.GetComponent<Text>()
     }
 
     protected override bool ShouldHighlight()
@@ -49,12 +50,12 @@ public class Bridge : Interactable
 
     public override void Interact()
     {
-        if(Player.player.GetAmountOfItem("Log")>=3 && Player.player.GetAmountOfItem("Axe")>=1)
+        if (Player.player.GetAmountOfItem("Log") >= 3 && Player.player.GetAmountOfItem("Axe") >= 1)
         {
             Player.player.AddDeltaItems("Log", -3);
 
             materials.SetActive(false);
-            Sprite.color = new Color(255,255,255,1);
+            Sprite.color = new Color(255, 255, 255, 1);
             defaultColor = new Color(255, 255, 255, 1);
             enabled = false;
             isRepaired = true;
@@ -62,6 +63,9 @@ public class Bridge : Interactable
             var oldSize = collider.size;
             oldSize.y = 3;
             collider.size = oldSize;
+
         }
     }
 }
+
+

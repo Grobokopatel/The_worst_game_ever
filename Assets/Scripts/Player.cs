@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private GameObject inventoryCanvas;
     [SerializeField]
     private GameObject itemPrefab;
-
+    public static GameObject text;
     public PlayerState State
     {
         get => (PlayerState)animator.GetInteger("State");
