@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Collectable : Interactable
@@ -8,6 +7,7 @@ public class Collectable : Interactable
         var resource = Technical.GetItem(gameObject.name.GetItemNameWithoutAdditInfo());
         Player.player.AddDeltaItems(resource, 1);
         Destroy(gameObject);
-        Debug.Log($"Количество {resource} в инвентаре: {Player.player.GetAmountOfItem(resource)}");
+        Player.CreateText();
+        Debug.Log($"РљРѕР»РёС‡РµСЃС‚РІРѕ {resource} РІ РёРЅРІРµРЅС‚Р°СЂРµ: {Player.player.GetAmountOfItem(resource)}");
     }
 }

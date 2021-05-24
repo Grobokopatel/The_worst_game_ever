@@ -37,15 +37,15 @@ public class TradeButton : MonoBehaviour
         var player = Player.player;
         if (TradeInfo.CanCraft())
         {
-            Debug.Log($"Ты скрафтил {TradeInfo.Results[0].Item.ItemName}");
+            Debug.Log($"РўС‹ СЃРєСЂР°С„С‚РёР» {TradeInfo.Results[0].Item.ItemName}");
             TradeInfo.Craft();
-            Debug.Log($"Количество брёвен после крафта {player.GetAmountOfItem("Log")}");
-            Debug.Log($"Количество камней после крафта {player.GetAmountOfItem("Rock")}");
+            Debug.Log($"РљРѕР»РёС‡РµСЃС‚РІРѕ Р±СЂС‘РІРµРЅ РїРѕСЃР»Рµ РєСЂР°С„С‚Р° {player.GetAmountOfItem("Log")}");
+            Debug.Log($"РљРѕР»РёС‡РµСЃС‚РІРѕ РєР°РјРЅРµР№ РїРѕСЃР»Рµ РєСЂР°С„С‚Р° {player.GetAmountOfItem("Rock")}");
             TradingMenu.tradingMenu.UpdateItemsAmount();
         }
         else
         {
-            Debug.Log("Недостаточно ресурсов");
+            Debug.Log("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЂРµСЃСѓСЂСЃРѕРІ");
         }
     }
 }
