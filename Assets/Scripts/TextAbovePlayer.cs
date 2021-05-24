@@ -5,7 +5,6 @@ public class TextAbovePlayer : MonoBehaviour
 {
     public Text Text;
     public double TimeToDisappear = 8;
-    
 
     public void Update()
     {
@@ -14,8 +13,8 @@ public class TextAbovePlayer : MonoBehaviour
             Destroy(gameObject);
 
         transform.Translate(transform.up * 0.01F);
-        var color = Text.color;
-        color.a -= 0.01f;
-        Text.color = color;
+        //var color = Text.color;
+        //color.a -= 0.01f;
+        //Text.color = color;
     }
 }

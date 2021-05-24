@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float speed = 3F;
 
+    [SerializeField]
+    private GameObject canvas;
+
     private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer sprite;
@@ -209,9 +212,9 @@ public class Player : MonoBehaviour
         return 0;
     }
 
-    public static void CreateText()
+    public void CreateText()
     {
-        var floatingText = Instantiate(textPrefab, player.transform);
+        var floatingText = Instantiate(textPrefab, canvas.transform);
         floatingText.GetComponent<Text>().text = "+1 бревно";
     }
 }
