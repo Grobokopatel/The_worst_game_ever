@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private GameObject inventoryCanvas;
     [SerializeField]
     private GameObject itemPrefab;
+    public static GameObject textPrefab;
 
     public PlayerState State
     {
@@ -63,8 +64,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        //AddDeltaItems("Saw", 1);
-        //AddDeltaItems("Log", 5);
+        textPrefab = Resources.Load<GameObject>("Prefabs/TextAbovePlayer");
         AddDeltaItems("ShovelRecipe", 1);
         player = this;
         collider = GetComponent<BoxCollider2D>();
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
     public void AddDeltaItems(Item item, int deltaAmount)
     {
         int newQuantity;
-        if (item.ItemName == "Лодка")
+        if (item.ItemName == "пїЅпїЅпїЅпїЅпїЅ")
         {
             var playerPosition = transform.position;
             playerPosition.x += 2;
@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (item.ItemName == "Вторая часть ключа" && !Shop.WasCanvasOpenedBefore)
+        if (item.ItemName == "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ" && !Shop.WasCanvasOpenedBefore)
         {
             CraftingMenu.craftingMenu.AddRecipeOnCanvas(Resources.Load<CraftingRecipe>("Prefabs/Crafting recipes/KeyRecipe"));
         }
@@ -189,6 +189,7 @@ public class Player : MonoBehaviour
     public void AddDeltaItems(string itemName, int deltaAmount)
     {
         AddDeltaItems(Technical.GetItem(itemName), deltaAmount);
+
     }
 
     public int GetAmountOfItem(Item item)
@@ -208,5 +209,11 @@ public class Player : MonoBehaviour
 
         AddDeltaItems(item, 0);
         return 0;
+    }
+
+    public static void CreateText()
+    {
+        var floatingText = Instantiate(textPrefab, player.transform);
+        floatingText.GetComponent<Text>().text = "+1 Р±СЂРµРІРЅРѕ";
     }
 }

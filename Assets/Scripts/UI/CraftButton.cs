@@ -17,17 +17,17 @@ public class CraftButton : MonoBehaviour
         var player = Player.player;
         if (CraftingRecipe.CanCraft())
         {
-            Debug.Log($"Ты скрафтил {CraftingRecipe.Results[0].Item.ItemName}");
+            Debug.Log($"РўС‹ СЃРєСЂР°С„С‚РёР» {CraftingRecipe.Results[0].Item.ItemName}");
             CraftingRecipe.Craft();
-            Debug.Log($"Количество пил после крафта {player.GetAmountOfItem("Saw")}");
-            Debug.Log($"Количество камней после крафта {player.GetAmountOfItem("Rock")}");
+            Debug.Log($"РљРѕР»РёС‡РµСЃС‚РІРѕ РїРёР» РїРѕСЃР»Рµ РєСЂР°С„С‚Р° {player.GetAmountOfItem("Saw")}");
+            Debug.Log($"РљРѕР»РёС‡РµСЃС‚РІРѕ РєР°РјРЅРµР№ РїРѕСЃР»Рµ РєСЂР°С„С‚Р° {player.GetAmountOfItem("Rock")}");
             CraftingMenu.craftingMenu.UpdateItemsAmount();
             GetComponent<Button>().interactable = false;
             Destroy(gameObject, 0.05F);
         }
         else
         {
-            Debug.Log("Недостаточно ресурсов");
+            Debug.Log("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЂРµСЃСѓСЂСЃРѕРІ");
         }
     }
 }

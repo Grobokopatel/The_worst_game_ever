@@ -38,7 +38,6 @@ public class Bridge : Interactable
         var playerHas = Player.player.GetAmountOfItem("Log");
         var color = playerHas < 3 ? "red" : "white";
         amount.text = $"<color={color}>{playerHas}/3</color>";
-
         mark.sprite = Player.player.GetAmountOfItem("Axe") >= 1 ? checkMark : cross;
     }
 
