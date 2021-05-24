@@ -124,11 +124,11 @@ public class Player : MonoBehaviour
     public void Move(bool shouldCheckOnCollidersAhead, float scale)
     {
         var deltaMovement = scale * transform.right;
-        sprite.flipX = deltaMovement.x < 0;
+        sprite.flipX = deltaMovement.x >= 0;
 
-        var colliderOffset = collider.offset;
+        /*var colliderOffset = collider.offset;
         colliderOffset.x = (float)Math.Abs(colliderOffset.x) * (sprite.flipX ? 1 : -1);
-        collider.offset = colliderOffset;
+        collider.offset = colliderOffset;*/
 
         var bobberCoords = bobber.transform.localPosition;
         bobberCoords.x = (float)Math.Abs(bobberCoords.x) * (sprite.flipX ? -1 : 1);
