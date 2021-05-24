@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
             switch (value)
             {
                 case PlayerState.Idle:
+                    enabled = true;
                     var newPosition = player.transform.position;
                     newPosition.y = ConstantYPosition;
                     transform.position = newPosition;
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
                     break;
 
                 case PlayerState.Fishing:
+                    enabled = false;
                     Instantiate(fishingGamePrefab);
                     break;
             }
@@ -76,13 +78,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod") >= 1 && State != PlayerState.InBoat) || State == PlayerState.Fishing)
+        if (Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod") >= 1 && State != PlayerState.InBoat)
         {
-            if (State != PlayerState.Fishing)
-            {
-                State = PlayerState.Fishing;
-            }
-
+            State = PlayerState.Fishing;
             return;
         }
 

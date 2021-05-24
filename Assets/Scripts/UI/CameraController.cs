@@ -16,8 +16,17 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Transform target;
 
+    public const float constantYCoord = -4.982996F;
     [SerializeField]
-    private float yCoord = -4.982996F;
+    private float yCoord = constantYCoord;
+    public float YCoord
+    {
+        get => yCoord;
+        set
+        {
+            yCoord = value;
+        }
+    }
     private const float zOffset = -10F;
     private float xOffset;
 

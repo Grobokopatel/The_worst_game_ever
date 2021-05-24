@@ -24,6 +24,7 @@ public class Shop : Interactable
 
         if (!WasCanvasOpenedBefore)
         {
+            WasCanvasOpenedBefore = true;
             CraftingMenu.craftingMenu.AddRecipeOnCanvas(Resources.Load<CraftingRecipe>("Prefabs/Crafting recipes/KeyRecipe"));
         }
     }

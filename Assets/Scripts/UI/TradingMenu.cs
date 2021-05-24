@@ -44,11 +44,11 @@ public class TradingMenu : ExchangeMenu
             var materialObject = buttonComponent.MaterialObject;
             var resultObject = buttonComponent.ResultObject;
 
-            materialObject.GetComponentInChildren<Image>().sprite = firstMaterial.Item.Icon;
-            materialObject.GetComponentInChildren<Text>().text = $"<color=white>{Player.player.GetAmountOfItem(firstMaterial.Item)}/{firstMaterial.Amount}</color>";
+            materialObject.GetComponentInChildren<Image>(true).sprite = firstMaterial.Item.Icon;
+            materialObject.GetComponentInChildren<Text>(true).text = $"<color=white>0/{firstMaterial.Amount}</color>";
 
-            resultObject.GetComponentInChildren<Image>().sprite = firstResult.Item.Icon;
-            resultObject.GetComponentInChildren<Text>().text = firstResult.Amount.ToString();
+            resultObject.GetComponentInChildren<Image>(true).sprite = firstResult.Item.Icon;
+            resultObject.GetComponentInChildren<Text>(true).text = firstResult.Amount.ToString();
 
             buttonComponent.NameObject.text = firstResult.Item.ItemName;
 
