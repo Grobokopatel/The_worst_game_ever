@@ -92,7 +92,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2739697, y: 0.45524305}
+  m_Offset: {x: -0.030869722, y: 0.44628286}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -103,7 +103,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5570438, y: 0.86795354}
+  m_Size: {x: 0.43256807, y: 0.889225}
   m_EdgeRadius: 0
 --- !u!50 &6161480860702340674
 Rigidbody2D:
@@ -139,9 +139,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  canvas: {fileID: 0}
   fishingGamePrefab: {fileID: 7293265199432827179, guid: 551cc295ad27a0a418eaebd46b0722b5, type: 3}
   boatPrefab: {fileID: 6158104239728456128, guid: 128d9f41d40ead94f9ab714fe00ec821, type: 3}
-  inventoryCanvas: {fileID: 4273294941805590954, guid: 4e1162253eb1e704292dedc1d90baa8f, type: 3}
+  inventoryCanvas: {fileID: 0}
   itemPrefab: {fileID: 4796803969128460841, guid: 73776a95db59a564a804ec741775c616, type: 3}
 --- !u!95 &1581515277
 Animator:
@@ -187,8 +188,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6161480861780628437}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5381, z: 0}
-  m_LocalScale: {x: 1.6612201, y: 1.6612201, z: 1.6612201}
+  m_LocalPosition: {x: 0, y: 0.5418, z: 0}
+  m_LocalScale: {x: 0.6663891, y: 0.6663891, z: 0.6663891}
   m_Children: []
   m_Father: {fileID: 6161480860702340672}
   m_RootOrder: 0
@@ -233,12 +234,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -6971176833807912366, guid: 473deca20e08fb842a9d03a6857a542c, type: 3}
+  m_Sprite: {fileID: -3331467284531206168, guid: bf7aaf4fd7d2c024f9d373fd97a53e10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.46875, y: 0.90625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

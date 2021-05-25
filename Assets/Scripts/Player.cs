@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     public PlayerState State
     {
-        get => (PlayerState) animator.GetInteger("State");
+        get => (PlayerState)animator.GetInteger("State");
         set
         {
             switch (value)
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
                     break;
             }
 
-            animator.SetInteger("State", (int) value);
+            animator.SetInteger("State", (int)value);
         }
     }
 
@@ -76,29 +76,41 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (State != PlayerState.InBoat)
-            State = PlayerState.Idle;
-        else if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        if (State == PlayerState.InBoat && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
                  && Enumerable.Range(0, 3)
                      .All(number =>
                          Technical.GetCollidersInPosition(transform.position + transform.up +
                                                           (0.75F - number * 0.75F) * transform.right).Length >= 1))
         {
-            Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>()
-                .flipX = !sprite.flipX;
-            State = PlayerState.Idle;
+            Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>().flipX = !sprite.flipX;
+            if (Input.GetButton("Horizontal"))
+            {
+                State = PlayerState.Idle;
+                State = PlayerState.Run;
+            }
+            else
+                State = PlayerState.Idle;
             sprite.sortingOrder = 5;
         }
 
         if (CurrentInteractable != null && Input.GetKeyDown(KeyCode.E))
             CurrentInteractable.Interact();
 
-        if (Input.GetButton("Horizontal"))
+        if (State != PlayerState.InBoat)
         {
-            if (State == PlayerState.InBoat)
-                Swim();
-            else
-                Walk();
+            if (Input.GetButtonDown("Horizontal"))
+                State = PlayerState.Run;
+            if (Input.GetButtonUp("Horizontal"))
+                State = PlayerState.Idle;
+        }
+
+        if (State == PlayerState.Run)
+        {
+            Walk();
+        }
+        else if (Input.GetButton("Horizontal") && State == PlayerState.InBoat)
+        {
+            Swim();
         }
     }
 
@@ -116,7 +128,7 @@ public class Player : MonoBehaviour
     public void Move(bool shouldCheckOnCollidersAhead, float scale)
     {
         var deltaMovement = scale * transform.right;
-        sprite.flipX = deltaMovement.x >= 0;
+        sprite.flipX = deltaMovement.x < 0;
 
         /*var colliderOffset = collider.offset;
         colliderOffset.x = (float)Math.Abs(colliderOffset.x) * (sprite.flipX ? 1 : -1);
@@ -127,7 +139,7 @@ public class Player : MonoBehaviour
         bobber.transform.localPosition = bobberCoords;
 
         if (!shouldCheckOnCollidersAhead ||
-            Technical.GetCollidersInPosition(transform.position + 0.5F * deltaMovement.normalized +
+            Technical.GetCollidersInPosition(transform.position + 0.7F * deltaMovement.normalized +
                                              (-0.5F) * transform.up).Length >= 1)
             transform.position = Vector3.MoveTowards(transform.position, transform.position + deltaMovement,
                 speed * Time.deltaTime);

@@ -6,8 +6,8 @@ public class Boat : Interactable
 {
     public override void Interact()
     {
+        Player.player.State = PlayerState.InBoat;
         Player.player.transform.position = transform.position;
         Destroy(gameObject);
-        Player.player.State = PlayerState.InBoat;
     }
 }
