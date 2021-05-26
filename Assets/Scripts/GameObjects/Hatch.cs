@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Hatch : Interactable
 {
     public bool isDugOut = false;
+    [SerializeField] private GameObject autro;
 
     public override void Interact()
     {
         if(Player.player.GetAmountOfItem("Key")>=1)
         {
             Debug.Log("Конец игры");
+            autro.SetActive(true);
         }
     }
 
