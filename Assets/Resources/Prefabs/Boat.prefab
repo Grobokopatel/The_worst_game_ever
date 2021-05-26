@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015009165, y: 1.7088041}
+  m_Offset: {x: 0.39670014, y: 1.7088041}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7258124, y: 0.863636}
+  m_Size: {x: 2.418901, y: 0.863636}
   m_EdgeRadius: 0
 --- !u!114 &6158104239728456157
 MonoBehaviour:
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 6158104240199986681}
   - component: {fileID: 6158104240199986680}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,8 +96,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6158104240199986682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.046, y: 0.231, z: 0.44084713}
-  m_LocalScale: {x: 2.0834, y: 2.0834, z: 2.0834}
+  m_LocalPosition: {x: 0.366, y: 0.457, z: 0.4408}
+  m_LocalScale: {x: 2.3282163, y: 2.3282163, z: 2.3282163}
   m_Children: []
   m_Father: {fileID: 6158104239728456158}
   m_RootOrder: 0

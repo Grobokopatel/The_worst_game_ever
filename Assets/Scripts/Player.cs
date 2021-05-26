@@ -19,14 +19,6 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject boatPrefab;
     [SerializeField] private GameObject inventoryCanvas;
     [SerializeField] private GameObject itemPrefab;
-    public static GameObject PopUpText;
-    private float timeBetweenPopUpTexts = 0.3F;
-    private float currentTime;
-    public Queue<string> TextsToPopUp
-    {
-        get;
-        set;
-    }
 
     public PlayerState State
     {
@@ -64,10 +56,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        TextsToPopUp = new Queue<string>();
-        currentTime = timeBetweenPopUpTexts;
-        PopUpText = Resources.Load<GameObject>("Prefabs/PopUpText");
-        AddDeltaItems("ShovelRecipe", 1);
+
+        //AddDeltaItems("ShovelRecipe", 1);
         player = this;
         collider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -78,13 +68,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        currentTime -= Time.deltaTime;
-        if(currentTime<=0 && TextsToPopUp.Count!=0)
-        {
-            CreateText(TextsToPopUp.Dequeue());
-            currentTime = timeBetweenPopUpTexts;
-        }
-
         if (Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod") >= 1 && State != PlayerState.InBoat)
         {
             State = PlayerState.Fishing;
@@ -115,7 +98,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetButtonDown("Horizontal"))
                 State = PlayerState.Run;
-            if (Input.GetButtonUp("Horizontal"))
+            if (Input.GetButtonUp("Horizontal") && !Input.GetButton("Horizontal"))
                 State = PlayerState.Idle;
         }
 
@@ -165,7 +148,8 @@ public class Player : MonoBehaviour
 
     public void AddDeltaItems(Item item, int deltaAmount)
     {
-        TextsToPopUp.Enqueue($"{deltaAmount} {item.ItemName}");
+        if (deltaAmount != 0)
+            PopUpTextCreator.TextsToPopUp.Enqueue(($"{(deltaAmount > 0 ? "+" : "")}{deltaAmount} {item.ItemName}", Color.white));
         int newQuantity;
         if (item.ItemName == "�����")
         {
@@ -237,9 +221,5 @@ public class Player : MonoBehaviour
         return 0;
     }
 
-    public static void CreateText(string text)
-    {
-        var floatingText = Instantiate(PopUpText, player.transform.position, player.transform.rotation);
-        floatingText.GetComponentInChildren<Text>().text = text;
-    }
+
 }

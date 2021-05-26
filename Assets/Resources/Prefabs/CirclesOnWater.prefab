@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4220582027793575705}
   - component: {fileID: 4220582027793575710}
+  - component: {fileID: 9192017512685940259}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4220582027793575704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 48.644672}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 4220582029293726585}
   m_RootOrder: 0
@@ -71,17 +72,36 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 09b68c91f68e6d741ac0d43e5145e4d7, type: 3}
+  m_Sprite: {fileID: -8555599076299583737, guid: 8af05113d90f74742a4ddd10a1f5c75d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.18, y: 0.15}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &9192017512685940259
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220582027793575704}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8fb41b48e1128e2459632ab0d9ad4074, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4220582029293726587
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,5 +178,6 @@ MonoBehaviour:
     amount: 1
   - item: {fileID: 11400000, guid: 61429b1151d16dd44aae8da1aaf22455, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: b7d26f266a2d6df4c9b5961cba74b001, type: 2}
-    amount: 1
+  secondsPerArrow: 0.4
+  minArrowAmount: 10
+  maxArrowAmount: 12
