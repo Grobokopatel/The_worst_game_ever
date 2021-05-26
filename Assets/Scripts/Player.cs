@@ -20,6 +20,13 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject inventoryCanvas;
     [SerializeField] private GameObject itemPrefab;
     public static GameObject PopUpText;
+    private float timeBetweenPopUpTexts = 0.3F;
+    private float currentTime;
+    public Queue<string> TextsToPopUp
+    {
+        get;
+        set;
+    }
 
     public PlayerState State
     {
@@ -57,6 +64,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        TextsToPopUp = new Queue<string>();
+        currentTime = timeBetweenPopUpTexts;
         PopUpText = Resources.Load<GameObject>("Prefabs/PopUpText");
         AddDeltaItems("ShovelRecipe", 1);
         player = this;
@@ -69,6 +78,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        currentTime -= Time.deltaTime;
+        if(currentTime<=0 && TextsToPopUp.Count!=0)
+        {
+            CreateText(TextsToPopUp.Dequeue());
+            currentTime = timeBetweenPopUpTexts;
+        }
+
         if (Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod") >= 1 && State != PlayerState.InBoat)
         {
             State = PlayerState.Fishing;
@@ -149,6 +165,7 @@ public class Player : MonoBehaviour
 
     public void AddDeltaItems(Item item, int deltaAmount)
     {
+        TextsToPopUp.Enqueue($"{deltaAmount} {item.ItemName}");
         int newQuantity;
         if (item.ItemName == "�����")
         {
