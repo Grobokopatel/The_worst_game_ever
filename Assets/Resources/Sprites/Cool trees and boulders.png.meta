@@ -1,0 +1,636 @@
+fileFormatVersion: 2
+guid: c27da2cfaba190c428c844412fb6a763
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9017554161288207251
+    second: Cool trees and boulders_0
+  - first:
+      213: -471631364869464545
+    second: Cool trees and boulders_1
+  - first:
+      213: 4403373542506049084
+    second: Cool trees and boulders_2
+  - first:
+      213: 3654131177502883132
+    second: Cool trees and boulders_3
+  - first:
+      213: 7104995012603836699
+    second: Cool trees and boulders_4
+  - first:
+      213: -8131960399039324217
+    second: Cool trees and boulders_5
+  - first:
+      213: 6456141148900287426
+    second: Cool trees and boulders_6
+  - first:
+      213: 651001965090007925
+    second: Cool trees and boulders_7
+  - first:
+      213: 1793342754836092346
+    second: Cool trees and boulders_8
+  - first:
+      213: -5008632320935215777
+    second: Cool trees and boulders_9
+  - first:
+      213: 5361496734249440861
+    second: Cool trees and boulders_10
+  - first:
+      213: -6615263148977192570
+    second: Cool trees and boulders_11
+  - first:
+      213: -1152220286324807530
+    second: Cool trees and boulders_12
+  - first:
+      213: 7451439972826949970
+    second: Cool trees and boulders_13
+  - first:
+      213: -7751148906013163352
+    second: Cool trees and boulders_14
+  - first:
+      213: 8370975526220455602
+    second: Cool trees and boulders_15
+  - first:
+      213: -5934347146084373224
+    second: Cool trees and boulders_16
+  - first:
+      213: -8960709848062498978
+    second: Cool trees and boulders_17
+  - first:
+      213: -5470748126861489711
+    second: Cool trees and boulders_18
+  - first:
+      213: -257589330233935066
+    second: Cool trees and boulders_19
+  - first:
+      213: -7274646594381866013
+    second: Cool trees and boulders_20
+  - first:
+      213: -4620991498370544216
+    second: Cool trees and boulders_21
+  - first:
+      213: 474682785001770881
+    second: Cool trees and boulders_22
+  - first:
+      213: -53951562827500644
+    second: Cool trees and boulders_23
+  - first:
+      213: 4505017905539999698
+    second: Cool trees and boulders_24
+  - first:
+      213: -4366189104871945176
+    second: Cool trees and boulders_25
+  - first:
+      213: 179782411702984960
+    second: Cool trees and boulders_26
+  - first:
+      213: 4291967062019116575
+    second: Cool trees and boulders_27
+  - first:
+      213: 6400759578317873098
+    second: Cool trees and boulders_28
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cool trees and boulders_0
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 741
+        width: 138
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39bdd6e8bb9c42d70800000000000000
+      internalID: 9017554161288207251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_1
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 742
+        width: 266
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1ed500c5cd6479f0800000000000000
+      internalID: -471631364869464545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_2
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 810
+        width: 144
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3e2d6628eceb1d30800000000000000
+      internalID: 4403373542506049084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_3
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 712
+        width: 87
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3d3dbd02f416b230800000000000000
+      internalID: 3654131177502883132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_4
+      rect:
+        serializedVersion: 2
+        x: 1566
+        y: 723
+        width: 60
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b197c21f1530a9260800000000000000
+      internalID: 7104995012603836699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_5
+      rect:
+        serializedVersion: 2
+        x: 1670
+        y: 728
+        width: 138
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cf97bf1a19752f80800000000000000
+      internalID: -8131960399039324217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_6
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 399
+        width: 158
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c3ebf73b22d89950800000000000000
+      internalID: 6456141148900287426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_7
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 399
+        width: 264
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57b654d86d2d80900800000000000000
+      internalID: 651001965090007925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_8
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 415
+        width: 188
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab59686ebbb33e810800000000000000
+      internalID: 1793342754836092346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_9
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 469
+        width: 72
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5dbd14e073cd7ab0800000000000000
+      internalID: -5008632320935215777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_10
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 351
+        width: 274
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d56da559fdcd76a40800000000000000
+      internalID: 5361496734249440861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_11
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 416
+        width: 90
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6818b75173dd134a0800000000000000
+      internalID: -6615263148977192570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_12
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 406
+        width: 80
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6986c9a11cd7200f0800000000000000
+      internalID: -1152220286324807530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_13
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 79
+        width: 140
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2592f750d25d86760800000000000000
+      internalID: 7451439972826949970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_14
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 79
+        width: 138
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a08de723236e6490800000000000000
+      internalID: -7751148906013163352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_15
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 79
+        width: 86
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bedbd7c3edab2470800000000000000
+      internalID: 8370975526220455602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_16
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 79
+        width: 132
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81da9cf46b6f4ada0800000000000000
+      internalID: -5934347146084373224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_17
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 79
+        width: 64
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e57e3ea7ed925a380800000000000000
+      internalID: -8960709848062498978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_18
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 79
+        width: 104
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d989ca509ff314b0800000000000000
+      internalID: -5470748126861489711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_19
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 65
+        width: 184
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62bb9717edbdc6cf0800000000000000
+      internalID: -257589330233935066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool trees and boulders_20
+      rect:
+        serializedVersion: 2
+        x: 1543
+        y: 61
+        width: 124
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eb1d5317734b0b90800000000000000
+      internalID: -7274646594381866013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
