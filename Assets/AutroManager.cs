@@ -1,20 +1,23 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class VideoManager : MonoBehaviour
+public class AutroManager : MonoBehaviour
 {
     public VideoPlayer vPlayer;
-
-    [SerializeField]
-    private GameObject skipOption;
+    [SerializeField] private GameObject skipOption;
     private Image greenRing;
 
     private void Awake()
     {
         greenRing = skipOption.GetComponentInChildren<Image>();
-        vPlayer.loopPointReached += (video) => { video.Stop(); SceneManager.LoadScene("SampleScene"); };
+        vPlayer.loopPointReached += (video) =>
+        {
+            video.Stop();
+            Destroy(transform.parent.gameObject);
+            Player.player.enabled = true;
+        };
+        Player.player.enabled = false;
     }
 
     private void Update()
@@ -34,7 +37,8 @@ public class VideoManager : MonoBehaviour
         if (greenRing.fillAmount >= 1)
         {
             vPlayer.Stop();
-            SceneManager.LoadScene("SampleScene");
+            Destroy(transform.parent.gameObject);
+            Player.player.enabled = true;
         }
     }
 }
