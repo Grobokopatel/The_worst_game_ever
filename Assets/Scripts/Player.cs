@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float speed = 3F;
 
-    [SerializeField] private GameObject canvas;
     private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer sprite;
@@ -20,7 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject boatPrefab;
     [SerializeField] private GameObject inventoryCanvas;
     [SerializeField] private GameObject itemPrefab;
-    public static GameObject textPrefab;
+    public static GameObject PopUpText;
 
     public PlayerState State
     {
@@ -58,7 +57,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        textPrefab = Resources.Load<GameObject>("Prefabs/TextAbovePlayer");
+        PopUpText = Resources.Load<GameObject>("Prefabs/PopUpText");
         AddDeltaItems("ShovelRecipe", 1);
         player = this;
         collider = GetComponent<BoxCollider2D>();
@@ -221,9 +220,9 @@ public class Player : MonoBehaviour
         return 0;
     }
 
-    public void CreateText(Item resource)
+    public static void CreateText(string text)
     {
-        var floatingText = Instantiate(textPrefab, canvas.transform);
-        floatingText.GetComponent<Text>().text = "+1 " + resource.ItemName;
+        var floatingText = Instantiate(PopUpText, player.transform.position, player.transform.rotation);
+        floatingText.GetComponentInChildren<Text>().text = text;
     }
 }
