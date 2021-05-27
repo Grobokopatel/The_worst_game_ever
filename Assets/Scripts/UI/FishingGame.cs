@@ -111,6 +111,7 @@ public class FishingGame : MonoBehaviour
         rightPartProgressBar.fillAmount = leftTime / timeToCaught;
         if (leftTime <= 0)
         {
+            AudioManager.PlayAudio(AudioManager.FailSound);
             Destroy(gameObject);
             Player.player.State = PlayerState.Idle;
         }
@@ -131,7 +132,7 @@ public class FishingGame : MonoBehaviour
                 {
                     var prize = currentCircles.GetRandomItem();
                     Player.player.AddDeltaItems(prize, 1);
-
+                    AudioManager.PlayAudio(AudioManager.CatchSound);
                     Player.player.State = PlayerState.Idle;
                     Destroy(gameObject);
                 }
@@ -140,6 +141,7 @@ public class FishingGame : MonoBehaviour
             {
                 Player.player.State = PlayerState.Idle;
                 Debug.Log("Не та клавиша");
+                AudioManager.PlayAudio(AudioManager.FailSound);
                 Destroy(gameObject);
             }
         }

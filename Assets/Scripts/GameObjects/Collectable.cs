@@ -8,5 +8,6 @@ public class Collectable : Interactable
         Player.player.AddDeltaItems(resource, 1);
         Destroy(gameObject);
         Debug.Log($"Количество {resource} в инвентаре: {Player.player.GetAmountOfItem(resource)}");
+        AudioManager.PlayAudio(AudioManager.CollectSound);
     }
 }

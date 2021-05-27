@@ -16,6 +16,7 @@ public class AutroManager : MonoBehaviour
         {
             tipAfterGameCompletion.SetActive(true);
             video.Stop();
+            Player.player.GetComponent<AudioSource>().Play();
             Destroy(transform.parent.gameObject);
             Player.player.enabled = true;
         };
@@ -40,6 +41,7 @@ public class AutroManager : MonoBehaviour
         {
             tipAfterGameCompletion.SetActive(true);
             vPlayer.Stop();
+            Player.player.GetComponent<AudioSource>().Play();
             Destroy(transform.parent.gameObject);
             Player.player.enabled = true;
         }
