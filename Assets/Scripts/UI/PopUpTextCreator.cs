@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class PopUpTextCreator : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject inventory;
     public static GameObject PopUpText;
     private float timeBetweenPopUpTexts = 0.4F;
-    private float currentTime;
+    private float currentTime = 0;
     public static Queue<(string, Color)> TextsToPopUp
     {
         get;
@@ -17,8 +19,8 @@ public class PopUpTextCreator : MonoBehaviour
     private void Awake()
     {
         TextsToPopUp = new Queue<(string, Color)>();
-        currentTime = timeBetweenPopUpTexts;
         PopUpText = Resources.Load<GameObject>("Prefabs/PopUpText");
+        Player.player.AddDeltaItems("Shovel", 1);
     }
 
     private static void CreateText(string text, Color color)
@@ -30,7 +32,14 @@ public class PopUpTextCreator : MonoBehaviour
 
     void Update()
     {
-        currentTime -= Time.deltaTime;
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            inventory.SetActive(!inventory.activeInHierarchy);
+        }
+
+        if (currentTime > 0)
+            currentTime -= Time.deltaTime;
+
         if (currentTime <= 0 && TextsToPopUp.Count != 0)
         {
             var nextText = TextsToPopUp.Dequeue();

@@ -45,7 +45,7 @@ public class TradeButton : MonoBehaviour
         }
         else
         {
-            Debug.Log("Недостаточно ресурсов");
+            PopUpTextCreator.TextsToPopUp.Enqueue(($"Мне не хватает ресурсов для покупки", Color.red));
         }
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1796441084636149131}
   - component: {fileID: 1796441084636149130}
-  - component: {fileID: 1796441084636149132}
+  - component: {fileID: 1129282116332129887}
   m_Layer: 0
   m_Name: BigBoulder
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.060720444, y: -0.36364794}
+  m_Offset: {x: -19.22074, y: -0.36364794}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,9 +57,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.034172, y: 0.95581913}
+  m_Size: {x: 5.547001, y: 0.95581913}
   m_EdgeRadius: 0
---- !u!114 &1796441084636149132
+--- !u!114 &1129282116332129887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,11 +68,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1796441084636149129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bff3a74efaa9fa4b816cd0efa701ce0, type: 3}
+  m_Script: {fileID: 11500000, guid: 64fee3c2d1132a94595b3e87b86c8fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: 0}
-  itemToDestroyThis: {fileID: 11400000, guid: 146642aae731fe944b717b6a909ca20f, type: 2}
 --- !u!1 &1796441085644536304
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,8 +97,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796441085644536304}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -0.06, z: 17.146206}
-  m_LocalScale: {x: 2.5298, y: 2.5298, z: 2.5298}
+  m_LocalPosition: {x: -19.223, y: -0.185, z: 17.146206}
+  m_LocalScale: {x: 1.7532223, y: 1.6129, z: 1.6129}
   m_Children: []
   m_Father: {fileID: 1796441084636149131}
   m_RootOrder: 0
@@ -144,8 +142,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c178eceda2227564bbb1bf70c76f1c2f, type: 3}
+  m_SortingOrder: 11
+  m_Sprite: {fileID: 4403373542506049084, guid: c27da2cfaba190c428c844412fb6a763, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -169,16 +167,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012001127, y: -0.12274518}
+  m_Offset: {x: -0.1962322, y: -0.22600076}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8918919, y: 0.6351351}
+    oldSize: {x: 1.44, y: 1.06}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8678903, y: 0.38964468}
+  m_Size: {x: 1.8590624, y: 0.5961558}
   m_EdgeRadius: 0

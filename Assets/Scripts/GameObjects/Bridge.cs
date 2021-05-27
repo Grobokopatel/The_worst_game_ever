@@ -63,6 +63,10 @@ public class Bridge : Interactable
             collider.size = oldSize;
 
         }
+        else
+        {
+            PopUpTextCreator.TextsToPopUp.Enqueue(($"Мне не хватает ресурсов для починки", Color.red));
+        }
     }
 }
 

@@ -10,7 +10,7 @@ public class CraftButton : MonoBehaviour
     {
         get;
         set;
-    }    
+    }
 
     public void OnClick()
     {
@@ -27,7 +27,7 @@ public class CraftButton : MonoBehaviour
         }
         else
         {
-            Debug.Log("Недостаточно ресурсов");
+            PopUpTextCreator.TextsToPopUp.Enqueue(($"Мне не хватает ресурсов", Color.red));
         }
     }
 }

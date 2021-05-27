@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
     public static Player player;
     public readonly static float ConstantYPosition = -6.283F;
     [SerializeField] private GameObject fishingGamePrefab;
-    private Bobber bobber;
+    [SerializeField]
+    private GameObject bobber;
     [SerializeField] private GameObject boatPrefab;
     [SerializeField] private GameObject inventoryCanvas;
     [SerializeField] private GameObject itemPrefab;
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour
             switch (value)
             {
                 case PlayerState.Idle:
+                    sprite.sortingOrder = 5;
                     enabled = true;
                     var newPosition = player.transform.position;
                     newPosition.y = ConstantYPosition;
@@ -35,7 +37,8 @@ public class Player : MonoBehaviour
                     break;
 
                 case PlayerState.Run:
-
+                    sprite.sortingOrder = 5;
+                    enabled = true;
                     break;
 
                 case PlayerState.InBoat:
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
                     break;
 
                 case PlayerState.Fishing:
+                    sprite.sortingOrder = 11;
                     enabled = false;
                     Instantiate(fishingGamePrefab);
                     break;
@@ -63,16 +67,23 @@ public class Player : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
-        bobber = GetComponentInChildren<Bobber>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && player.GetAmountOfItem("FishingRod") >= 1 && State != PlayerState.InBoat)
-        {
-            State = PlayerState.Fishing;
-            return;
-        }
+        if (Input.GetKeyDown(KeyCode.F))
+            if (player.GetAmountOfItem("FishingRod") >= 1)
+            {
+                if (State != PlayerState.InBoat)
+                {
+                    State = PlayerState.Fishing;
+                    return;
+                }
+            }
+            else
+            {
+                PopUpTextCreator.TextsToPopUp.Enqueue(($"Мне нечем рыбачить", Color.white));
+            }
 
         if (State == PlayerState.InBoat && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
                  && Enumerable.Range(0, 3)

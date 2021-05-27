@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910621758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.276, y: -1.117, z: 0}
+  m_LocalPosition: {x: -1.276, y: -1.117, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6161480860702340672}
@@ -139,8 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  canvas: {fileID: 0}
   fishingGamePrefab: {fileID: 7293265199432827179, guid: 551cc295ad27a0a418eaebd46b0722b5, type: 3}
+  bobber: {fileID: 1910621758}
   boatPrefab: {fileID: 6158104239728456128, guid: 128d9f41d40ead94f9ab714fe00ec821, type: 3}
   inventoryCanvas: {fileID: 0}
   itemPrefab: {fileID: 4796803969128460841, guid: 73776a95db59a564a804ec741775c616, type: 3}

@@ -17,7 +17,7 @@ public class FishingGame : MonoBehaviour
     public static KeyCode[] arrowsKeyCodes = Enumerable.Range(273, 4).Select(number => (KeyCode)number).ToArray();
     private float timeToCaught;
     private float leftTime;
-    private Timer timer = new Timer(new System.Random().Next(0));
+    private Timer timer = new Timer(new System.Random().Next(3,5));
     private Color currentButtonColor = Color.red;
     [SerializeField]
     private Image leftPartProgressBar;
@@ -87,7 +87,7 @@ public class FishingGame : MonoBehaviour
         {
             if ((Input.GetButton("Horizontal") && timer.LeftTime > 0) || Input.GetKeyDown(KeyCode.Escape))
             {
-                Player.player.State = PlayerState.Run;
+                Player.player.State = PlayerState.Idle;
                 Destroy(gameObject);
             }
 
@@ -99,7 +99,7 @@ public class FishingGame : MonoBehaviour
             if (!playersBobber.HasAnyCirclesOnIt())
             {
                 Player.player.State = PlayerState.Idle;
-                Debug.Log("Не клюёт");
+                PopUpTextCreator.TextsToPopUp.Enqueue(($"Кажется, здесь не клюёт", Color.red));
                 Destroy(gameObject);
                 return;
             }
