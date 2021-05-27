@@ -3,11 +3,11 @@ using System;
 
 public class Hatch : Interactable
 {
-    public bool isDugOut = false;
+    public bool isDugOut;
     private float currentReload = 0;
-    private float reload = 4;
+    private readonly float reload = 4;
     [SerializeField] private GameObject autro;
-    private string[] phrases = new[] {
+    private string[] phrases = {
         "Я думал будет смешнее",
         "Я ненавижу аниме",
         "Эх, вот бы в финал пройти",
@@ -22,6 +22,7 @@ public class Hatch : Interactable
             if (autro != null)
             {
                 Debug.Log("Конец игры");
+                Player.player.GetComponent<AudioSource>().Stop();
                 autro.SetActive(true);
             }
             else

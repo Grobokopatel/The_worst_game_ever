@@ -12,6 +12,7 @@ public class Destructible : Interactable
     {
         var objectTransform = gameObject.transform;
         Destroy(gameObject);
+        AudioManager.PlayAudio(AudioManager.DestructSound);
         if (objectToSpawn != null)
             Instantiate(objectToSpawn, objectTransform.position, objectTransform.rotation);
 

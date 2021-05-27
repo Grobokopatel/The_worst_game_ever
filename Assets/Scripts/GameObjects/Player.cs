@@ -15,15 +15,14 @@ public class Player : MonoBehaviour
     public static Player player;
     public readonly static float ConstantYPosition = -6.283F;
     [SerializeField] private GameObject fishingGamePrefab;
-    [SerializeField]
-    private GameObject bobber;
+    [SerializeField] private GameObject bobber;
     [SerializeField] private GameObject boatPrefab;
     [SerializeField] private GameObject inventoryCanvas;
     [SerializeField] private GameObject itemPrefab;
 
     public PlayerState State
     {
-        get => (PlayerState)animator.GetInteger("State");
+        get => (PlayerState) animator.GetInteger("State");
         set
         {
             switch (value)
@@ -52,7 +51,7 @@ public class Player : MonoBehaviour
                     break;
             }
 
-            animator.SetInteger("State", (int)value);
+            animator.SetInteger("State", (int) value);
         }
     }
 
@@ -60,7 +59,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-
         AddDeltaItems("Shovel", 1);
         AddDeltaItems("Key", 1);
         player = this;
@@ -68,6 +66,10 @@ public class Player : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        StartCoroutine(Technical.WaitThenInvokeMethod(3, () =>
+        {
+            GetComponent<AudioSource>().Play();
+        }));
     }
 
     private void Update()
@@ -87,12 +89,13 @@ public class Player : MonoBehaviour
             }
 
         if (State == PlayerState.InBoat && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-                 && Enumerable.Range(0, 3)
-                     .All(number =>
-                         Technical.GetCollidersInPosition(transform.position + transform.up +
-                                                          (0.75F - number * 0.75F) * transform.right).Length >= 1))
+                                        && Enumerable.Range(0, 3)
+                                            .All(number =>
+                                                Technical.GetCollidersInPosition(transform.position + transform.up +
+                                                    (0.75F - number * 0.75F) * transform.right).Length >= 1))
         {
-            Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>().flipX = !sprite.flipX;
+            Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>()
+                .flipX = !sprite.flipX;
             if (Input.GetButton("Horizontal"))
             {
                 State = PlayerState.Idle;
@@ -100,6 +103,7 @@ public class Player : MonoBehaviour
             }
             else
                 State = PlayerState.Idle;
+
             sprite.sortingOrder = 5;
         }
 
@@ -161,7 +165,8 @@ public class Player : MonoBehaviour
     public void AddDeltaItems(Item item, int deltaAmount)
     {
         if (deltaAmount != 0)
-            PopUpTextCreator.TextsToPopUp.Enqueue(($"{(deltaAmount > 0 ? "+" : "")}{deltaAmount} {item.ItemName}", Color.white));
+            PopUpTextCreator.TextsToPopUp.Enqueue(($"{(deltaAmount > 0 ? "+" : "")}{deltaAmount} {item.ItemName}",
+                Color.white));
         int newQuantity;
         if (item.ItemName == "Лодка")
         {
@@ -232,6 +237,4 @@ public class Player : MonoBehaviour
         AddDeltaItems(item, 0);
         return 0;
     }
-
-
 }
