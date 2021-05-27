@@ -60,9 +60,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-
-        AddDeltaItems("Shovel", 1);
-        AddDeltaItems("Key", 1);
+        //AddDeltaItems("Shovel", 1);
+        //AddDeltaItems("Key", 1);
         player = this;
         collider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();

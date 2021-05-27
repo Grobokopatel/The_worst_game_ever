@@ -8,7 +8,7 @@ public class PopUpTextCreator : MonoBehaviour
     [SerializeField]
     private GameObject inventory;
     public static GameObject PopUpText;
-    private float timeBetweenPopUpTexts = 1.2F;
+    private float timeBetweenPopUpTexts = 0.3F;
     private float currentTime = 0;
     public static Queue<(string, Color)> TextsToPopUp
     {
@@ -19,7 +19,7 @@ public class PopUpTextCreator : MonoBehaviour
     private void Awake()
     {
         TextsToPopUp = new Queue<(string, Color)>();
-        PopUpText = Resources.Load<GameObject>("Prefabs/PopUpText");
+        PopUpText = Resources.Load<GameObject>("Prefabs/UI/PopUpText");
     }
 
     private static void CreateText(string text, Color color)
