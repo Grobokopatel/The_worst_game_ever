@@ -20,7 +20,7 @@ public class Shop : Interactable
 
         tradingMenu.gameObject.SetActive(true);
         tradingMenu.UpdateItemsAmount();
-        cameraController.XOffset = 3.5F;
+        cameraController.XOffset = 3F;
 
         if (!WasCanvasOpenedBefore)
         {

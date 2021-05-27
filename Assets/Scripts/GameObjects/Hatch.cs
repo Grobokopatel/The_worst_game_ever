@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class Hatch : Interactable
 {
@@ -6,13 +7,25 @@ public class Hatch : Interactable
     private float currentReload = 0;
     private float reload = 4;
     [SerializeField] private GameObject autro;
+    private string[] phrases = new[] {
+        "я думал будет смешнее",
+        "я ненавижу аниме",
+        "Ёх, вот бы в финал пройти",
+        "„увак, ты думал что-то здесь будет?",
+        "»нтересно, они вравду эту игру за 5 часов сделали?"
+    };
 
     public override void Interact()
     {
         if (Player.player.GetAmountOfItem("Key") >= 1)
         {
-            Debug.Log(" онец игры");
-            autro.SetActive(true);
+            if (autro != null)
+            {
+                Debug.Log(" онец игры");
+                autro.SetActive(true);
+            }
+            else
+                PopUpTextCreator.TextsToPopUp.Enqueue((phrases[new System.Random().Next(0, phrases.Length)], Color.white));
         }
         else
         {
@@ -49,6 +62,7 @@ public class Hatch : Interactable
                     }
                     else
                     {
+                        Debug.Log("я тут");
                         PopUpTextCreator.TextsToPopUp.Enqueue(($"я ничего не выкопал", Color.white));
                         currentReload = reload;
                     }

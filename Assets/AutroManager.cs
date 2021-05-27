@@ -7,12 +7,14 @@ public class AutroManager : MonoBehaviour
     public VideoPlayer vPlayer;
     [SerializeField] private GameObject skipOption;
     private Image greenRing;
-
+    [SerializeField]
+    private GameObject tipAfterGameCompletion;
     private void Awake()
     {
         greenRing = skipOption.GetComponentInChildren<Image>();
         vPlayer.loopPointReached += (video) =>
         {
+            tipAfterGameCompletion.SetActive(true);
             video.Stop();
             Destroy(transform.parent.gameObject);
             Player.player.enabled = true;
@@ -25,7 +27,7 @@ public class AutroManager : MonoBehaviour
         if (Input.anyKey)
         {
             skipOption.SetActive(true);
-            greenRing.fillAmount += 0.0070F;
+            greenRing.fillAmount += 0.007F;
         }
         else
         {
@@ -36,6 +38,7 @@ public class AutroManager : MonoBehaviour
 
         if (greenRing.fillAmount >= 1)
         {
+            tipAfterGameCompletion.SetActive(true);
             vPlayer.Stop();
             Destroy(transform.parent.gameObject);
             Player.player.enabled = true;

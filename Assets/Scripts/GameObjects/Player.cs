@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
                     break;
 
                 case PlayerState.InBoat:
-                    sprite.sortingOrder = 11;
+                    sprite.sortingOrder = 12;
                     break;
 
                 case PlayerState.Fishing:
@@ -61,7 +61,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
 
-        //AddDeltaItems("ShovelRecipe", 1);
+        AddDeltaItems("Shovel", 1);
+        AddDeltaItems("Key", 1);
         player = this;
         collider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -109,7 +110,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetButtonDown("Horizontal"))
                 State = PlayerState.Run;
-            if (Input.GetButtonUp("Horizontal") && !Input.GetButton("Horizontal"))
+            if ((Input.GetButtonUp("Horizontal") && !Input.GetButton("Horizontal")) || !Input.GetButton("Horizontal"))
                 State = PlayerState.Idle;
         }
 
@@ -162,7 +163,7 @@ public class Player : MonoBehaviour
         if (deltaAmount != 0)
             PopUpTextCreator.TextsToPopUp.Enqueue(($"{(deltaAmount > 0 ? "+" : "")}{deltaAmount} {item.ItemName}", Color.white));
         int newQuantity;
-        if (item.ItemName == "�����")
+        if (item.ItemName == "Лодка")
         {
             var playerPosition = transform.position;
             playerPosition.x += 2;
@@ -171,7 +172,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (item.ItemName == "������ ����� �����" && !Shop.WasCanvasOpenedBefore)
+        if (item.ItemName == "Вторая часть ключа" && !Shop.WasCanvasOpenedBefore)
         {
             CraftingMenu.craftingMenu.AddRecipeOnCanvas(
                 Resources.Load<CraftingRecipe>("Prefabs/Crafting recipes/KeyRecipe"));

@@ -16,6 +16,6 @@ public class PopUpText : MonoBehaviour
         if (timeToDisappear <= 0)
             Destroy(gameObject);
 
-        text.transform.Translate(transform.up * 0.005F);
+        text.transform.Translate(transform.up * 0.02F);
     }
 }

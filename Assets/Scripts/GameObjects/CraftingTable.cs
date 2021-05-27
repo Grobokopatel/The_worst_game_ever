@@ -25,6 +25,6 @@ public class CraftingTable : Interactable
         
         craftingMenu.gameObject.SetActive(true);
         craftingMenu.UpdateItemsAmount();
-        cameraController.XOffset = 3.5F;
+        cameraController.XOffset = 3F;
     }
 }

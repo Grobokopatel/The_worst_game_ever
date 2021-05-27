@@ -8,7 +8,7 @@ public class PopUpTextCreator : MonoBehaviour
     [SerializeField]
     private GameObject inventory;
     public static GameObject PopUpText;
-    private float timeBetweenPopUpTexts = 0.4F;
+    private float timeBetweenPopUpTexts = 1.2F;
     private float currentTime = 0;
     public static Queue<(string, Color)> TextsToPopUp
     {
@@ -20,7 +20,6 @@ public class PopUpTextCreator : MonoBehaviour
     {
         TextsToPopUp = new Queue<(string, Color)>();
         PopUpText = Resources.Load<GameObject>("Prefabs/PopUpText");
-        Player.player.AddDeltaItems("Shovel", 1);
     }
 
     private static void CreateText(string text, Color color)
@@ -38,13 +37,13 @@ public class PopUpTextCreator : MonoBehaviour
         }
 
         if (currentTime > 0)
-            currentTime -= Time.deltaTime;
+            currentTime -= Time.fixedDeltaTime;
 
         if (currentTime <= 0 && TextsToPopUp.Count != 0)
         {
+            currentTime = timeBetweenPopUpTexts;
             var nextText = TextsToPopUp.Dequeue();
             CreateText(nextText.Item1, nextText.Item2);
-            currentTime = timeBetweenPopUpTexts;
         }
     }
 }
