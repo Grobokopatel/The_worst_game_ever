@@ -43,6 +43,9 @@ public class TradeButton : MonoBehaviour
             Debug.Log($"Количество брёвен после крафта {player.GetAmountOfItem("Log")}");
             Debug.Log($"Количество камней после крафта {player.GetAmountOfItem("Rock")}");
             TradingMenu.tradingMenu.UpdateItemsAmount();
+
+            if (TradeInfo.Results[0].Item.ItemName == "Чертёж лопаты")
+                Destroy(gameObject);
         }
         else
         {

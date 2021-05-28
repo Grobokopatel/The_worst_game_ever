@@ -20,10 +20,13 @@ public class TradingMenu : ExchangeMenu
     {
         foreach (var material in allMaterials)
         {
-            var playerHas = Player.player.GetAmountOfItem(material.Item2);
-            var needed = int.Parse(material.Item1.text.Split(new[] { '/', '<', '>' }, StringSplitOptions.RemoveEmptyEntries)[2]);
-            var color = playerHas < needed ? "red" : "white";
-            material.Item1.text = $"<color={color}>{playerHas}/{needed}</color>";
+            if (material.Item1 != null)
+            {
+                var playerHas = Player.player.GetAmountOfItem(material.Item2);
+                var needed = int.Parse(material.Item1.text.Split(new[] { '/', '<', '>' }, StringSplitOptions.RemoveEmptyEntries)[2]);
+                var color = playerHas < needed ? "red" : "white";
+                material.Item1.text = $"<color={color}>{playerHas}/{needed}</color>";
+            }
         }
     }
 

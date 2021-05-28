@@ -20,8 +20,6 @@ public class CraftButton : MonoBehaviour
             Debug.Log($"Ты скрафтил {CraftingRecipe.Results[0].Item.ItemName}");
             CraftingRecipe.Craft();
             AudioManager.PlayAudio(AudioManager.CraftSound);
-            Debug.Log($"Количество пил после крафта {player.GetAmountOfItem("Saw")}");
-            Debug.Log($"Количество камней после крафта {player.GetAmountOfItem("Rock")}");
             CraftingMenu.craftingMenu.UpdateItemsAmount();
             GetComponent<Button>().interactable = false;
             Destroy(gameObject, 0.05F);

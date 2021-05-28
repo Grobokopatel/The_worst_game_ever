@@ -8,7 +8,7 @@ public class PopUpTextCreator : MonoBehaviour
     [SerializeField]
     private GameObject inventory;
     public static GameObject PopUpText;
-    private float timeBetweenPopUpTexts = 0.3F;
+    private float timeBetweenPopUpTexts = 0.27F;
     private float currentTime = 0;
     public static Queue<(string, Color)> TextsToPopUp
     {
@@ -37,7 +37,7 @@ public class PopUpTextCreator : MonoBehaviour
         }
 
         if (currentTime > 0)
-            currentTime -= Time.fixedDeltaTime;
+            currentTime -= Time.deltaTime;
 
         if (currentTime <= 0 && TextsToPopUp.Count != 0)
         {

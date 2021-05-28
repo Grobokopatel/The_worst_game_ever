@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class BigBoulder : Interactable
 {
-public override void Interact()
+    [SerializeField]
+    private AudioClip soundToProduce;
+    public override void Interact()
     {
-        if(Player.player.GetAmountOfItem("Dynamite")>=1)
+        if (Player.player.GetAmountOfItem("Dynamite") >= 1)
         {
             Player.player.AddDeltaItems("Dynamite", -1);
+            AudioManager.PlayAudio(soundToProduce);
             Destroy(gameObject);
         }
         else

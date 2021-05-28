@@ -121,9 +121,11 @@ public class FishingGame : MonoBehaviour
             if (Input.GetKeyDown(currentArrowInfo.key))
             {
                 Debug.Log("Нужная клавиша");
+
                 currentArrowInfo.arrow.GetComponent<Image>().color = Color.white;
                 if (currentArrowIndex != arrowsInfo.Count)
                 {
+                    AudioManager.PlayAudio(AudioManager.RightArrow);
                     currentArrowInfo = arrowsInfo[currentArrowIndex];
                     currentArrowInfo.arrow.GetComponent<Image>().color = currentButtonColor;
                     ++currentArrowIndex;

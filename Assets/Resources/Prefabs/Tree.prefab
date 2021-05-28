@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 478654624995799445, guid: b12393135e1ba4143a5033a3020d62e4, type: 3}
+  soundToProduce: {fileID: 8300000, guid: f3cc84bc070c8e44fa221f270ebe445b, type: 3}
   itemToDestroyThis: {fileID: 11400000, guid: 3378b5520aeff18428e3d12efd4ee039, type: 2}
 --- !u!1 &8025468917525941227
 GameObject:

@@ -59,8 +59,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        //AddDeltaItems("Shovel", 1);
-        //AddDeltaItems("Key", 1);
         player = this;
         collider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -166,7 +164,7 @@ public class Player : MonoBehaviour
     {
         if (deltaAmount != 0)
             PopUpTextCreator.TextsToPopUp.Enqueue(($"{(deltaAmount > 0 ? "+" : "")}{deltaAmount} {item.ItemName}",
-                Color.white));
+                deltaAmount > 0 ? Color.white : Color.red));
         int newQuantity;
         if (item.ItemName == "Лодка")
         {

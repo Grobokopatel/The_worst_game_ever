@@ -50,6 +50,7 @@ public class Bridge : Interactable
     {
         if (Player.player.GetAmountOfItem("Log") >= 3 && Player.player.GetAmountOfItem("Axe") >= 1)
         {
+            AudioManager.PlayAudio(AudioManager.CraftSound);
             Player.player.AddDeltaItems("Log", -3);
 
             materials.SetActive(false);

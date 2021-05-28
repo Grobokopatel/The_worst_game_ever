@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioClip CollectSound, DestructSound, MoveSound, CatchSound, FailSound, CraftSound, TradeSound;
+    public static AudioClip CollectSound, DestructSound, MoveSound, CatchSound, FailSound, CraftSound, TradeSound, DigSound, RightArrow;
     private static AudioSource audioSource;
 
     private void Start()
@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
         FailSound = Resources.Load<AudioClip>("Audio/fail");
         CraftSound = Resources.Load<AudioClip>("Audio/craft");
         TradeSound = Resources.Load<AudioClip>("Audio/trade");
+        DigSound = Resources.Load<AudioClip>("Audio/dig");
+        RightArrow = Resources.Load<AudioClip>("Audio/rightArrow");
         audioSource = GetComponent<AudioSource>();
     }
 

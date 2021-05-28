@@ -54,6 +54,7 @@ public class Hatch : Interactable
             {
                 if (currentReload <= 0)
                 {
+                    AudioManager.PlayAudio(AudioManager.DigSound);
                     if (Mathf.Abs(transform.position.x - Player.player.transform.position.x) <= 1 && !isDugOut)
                     {
                         isDugOut = true;
@@ -63,8 +64,7 @@ public class Hatch : Interactable
                     }
                     else
                     {
-                        Debug.Log("Я тут");
-                        PopUpTextCreator.TextsToPopUp.Enqueue(($"Я ничего не выкопал", Color.white));
+                        PopUpTextCreator.TextsToPopUp.Enqueue(($"Я ничего не откопал", Color.white));
                         currentReload = reload;
                     }
                 }

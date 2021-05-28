@@ -21,18 +21,18 @@ public class IntroManager : MonoBehaviour
         if (Input.anyKey)
         {
             skipOption.SetActive(true);
-            greenRing.fillAmount += 0.0070F;
+            greenRing.fillAmount += Time.deltaTime * 0.84F;
         }
         else
         {
-            greenRing.fillAmount -= 0.03F;
+            greenRing.fillAmount -= Time.deltaTime * 1.8F;
             if (greenRing.fillAmount <= 0)
                 skipOption.SetActive(false);
         }
 
         if (greenRing.fillAmount >= 1)
         {
-            vPlayer.Stop(); 
+            vPlayer.Stop();
             SceneManager.LoadScene("SampleScene");
         }
     }
