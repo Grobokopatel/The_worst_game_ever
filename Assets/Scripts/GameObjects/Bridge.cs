@@ -19,9 +19,8 @@ public class Bridge : Interactable
     private BoxCollider2D collider;
     private bool isRepaired = false;
 
-    protected override void Awake()
+    protected override void Initialize()
     {
-        base.Awake();
         OnPlayerEntry += player =>
         {
             materials.SetActive(true);
@@ -66,7 +65,7 @@ public class Bridge : Interactable
         }
         else
         {
-            PopUpTextCreator.TextsToPopUp.Enqueue(($"Мне не хватает ресурсов для починки", Color.red));
+            PopUpTextCreator.QueueText($"Мне не хватает ресурсов для починки", Color.red);
         }
     }
 }

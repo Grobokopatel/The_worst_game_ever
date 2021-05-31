@@ -26,17 +26,14 @@ public class Hatch : Interactable
                 autro.SetActive(true);
             }
             else
-                PopUpTextCreator.TextsToPopUp.Enqueue((phrases[new System.Random().Next(0, phrases.Length)], Color.white));
+            {
+                PopUpTextCreator.QueueText(phrases[new System.Random().Next(0, phrases.Length)]);
+            }
         }
         else
         {
-            PopUpTextCreator.TextsToPopUp.Enqueue(($"Мой ключ не подходит, видимо нужен какой-то другой", Color.white));
+            PopUpTextCreator.QueueText($"Мой ключ не подходит, видимо нужен какой-то другой");
         }
-    }
-
-    private void Awake()
-    {
-        base.Awake();
     }
 
     protected override bool ShouldHighlight()
@@ -59,23 +56,23 @@ public class Hatch : Interactable
                     {
                         isDugOut = true;
                         GetComponentInChildren<SpriteRenderer>().color = new Color(255, 255, 255, 1);
-                        PopUpTextCreator.TextsToPopUp.Enqueue(($"Так, я что-то нашёл", Color.white));
+                        PopUpTextCreator.QueueText($"Так, я что-то нашёл");
                         currentReload = reload;
                     }
                     else
                     {
-                        PopUpTextCreator.TextsToPopUp.Enqueue(($"Я ничего не откопал", Color.white));
+                        PopUpTextCreator.QueueText($"Я ничего не откопал");
                         currentReload = reload;
                     }
                 }
                 else
                 {
-                    PopUpTextCreator.TextsToPopUp.Enqueue(($"Я устал, мне бы передохнуть ещё секунды {Mathf.CeilToInt(currentReload)}", Color.white));
+                    PopUpTextCreator.QueueText($"Я устал, мне бы передохнуть ещё секунды {Mathf.CeilToInt(currentReload)}");
                 }
             }
             else
             {
-                PopUpTextCreator.TextsToPopUp.Enqueue(($"Мне нечем копать", Color.white));
+                PopUpTextCreator.QueueText($"Мне нечем копать");
             }
     }
 }

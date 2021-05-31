@@ -50,7 +50,12 @@ public abstract class Interactable : MonoBehaviour
         return true;
     }
 
-    protected virtual void Awake()
+    protected virtual void Initialize()
+    {
+
+    }
+
+    protected void Awake()
     {
         Sprite = GetComponentInChildren<SpriteRenderer>();
         OnPlayerEntry += player =>
@@ -64,5 +69,6 @@ public abstract class Interactable : MonoBehaviour
             Sprite.color = defaultColor;
             player.CurrentInteractable = null;
         };
+        Initialize();
     }
 }

@@ -6,26 +6,29 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject pauseMenuUI;
-    [SerializeField]
-    private GameObject allUI;
-    [SerializeField]
-    private GameObject startTip;
-    public static bool GameIsPaused
+    [SerializeField] private GameObject pauseMenuUI;
+    public bool IsGamePaused
     {
-        get;
-        set;
+        get => pauseMenuUI.activeInHierarchy;   
     }
-    
+    [SerializeField] private GameObject allUI;
+    [SerializeField] private GameObject startTip;
+    public static PauseMenu pauseMenu;
+
+    private void Awake()
+    {
+        pauseMenu = this;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
             if (pauseMenuUI.gameObject.activeInHierarchy)
                 Resume();
             else
                 Pause();
-        
+        }
     }
 
     public void Resume()
@@ -48,8 +51,8 @@ public class PauseMenu : MonoBehaviour
 
     public void ChangeDifficulty(Text text)
     {
-        CirclesOnWater.isCasualDifficultyOn = !CirclesOnWater.isCasualDifficultyOn;
-        text.text = $"Сложность: {(CirclesOnWater.isCasualDifficultyOn ? "Казуальная" : "Нормальная")}";
+        Bubbles.isCasualDifficultyOn = !Bubbles.isCasualDifficultyOn;
+        text.text = $"Сложность: {(Bubbles.isCasualDifficultyOn ? "Казуальная" : "Нормальная")}";
     }
 
     public void QuitGame()

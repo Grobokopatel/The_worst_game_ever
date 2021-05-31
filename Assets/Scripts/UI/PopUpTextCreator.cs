@@ -7,10 +7,10 @@ public class PopUpTextCreator : MonoBehaviour
 {
     [SerializeField]
     private GameObject inventory;
-    public static GameObject PopUpText;
+    public static GameObject PopUpTextPrefab;
     private float timeBetweenPopUpTexts = 0.27F;
     private float currentTime = 0;
-    public static Queue<(string, Color)> TextsToPopUp
+    public static Queue<(string text, Color color)> TextsToPopUp
     {
         get;
         set;
@@ -19,12 +19,22 @@ public class PopUpTextCreator : MonoBehaviour
     private void Awake()
     {
         TextsToPopUp = new Queue<(string, Color)>();
-        PopUpText = Resources.Load<GameObject>("Prefabs/UI/PopUpText");
+        PopUpTextPrefab = Resources.Load<GameObject>("Prefabs/UI/PopUpText");
+    }
+
+    public static void QueueText(string text, Color color)
+    {
+        TextsToPopUp.Enqueue((text, color));
+    }
+
+    public static void QueueText(string text)
+    {
+        TextsToPopUp.Enqueue((text, Color.white));
     }
 
     private static void CreateText(string text, Color color)
     {
-        var floatingText = Instantiate(PopUpText, Player.player.transform.position, Player.player.transform.rotation);
+        var floatingText = Instantiate(PopUpTextPrefab, Player.player.transform.position, Player.player.transform.rotation);
         floatingText.GetComponentInChildren<Text>().text = text;
         floatingText.GetComponentInChildren<Text>().color = color;
     }
@@ -43,7 +53,7 @@ public class PopUpTextCreator : MonoBehaviour
         {
             currentTime = timeBetweenPopUpTexts;
             var nextText = TextsToPopUp.Dequeue();
-            CreateText(nextText.Item1, nextText.Item2);
+            CreateText(nextText.text, nextText.color);
         }
     }
 }

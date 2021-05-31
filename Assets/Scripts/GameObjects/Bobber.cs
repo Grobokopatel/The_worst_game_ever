@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class Bobber : MonoBehaviour
 {
-    public bool HasAnyCirclesOnIt()
+    public bool DoesTouchAnyBubbles()
     {
         return Technical.GetCollidersInPosition(transform.position)
-            .Any(collider => collider.GetComponent<CirclesOnWater>());
+            .Any(collider => collider.GetComponent<Bubbles>());
     }
 
     public Item TryToCatchItem()
     {
         return Technical.GetCollidersInPosition(transform.position)
-            .Select(collider => collider.GetComponent<CirclesOnWater>())
+            .Select(collider => collider.GetComponent<Bubbles>())
             .Where(circlesOnWater => circlesOnWater != null)
             .FirstOrDefault()
             .GetRandomItem();

@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class River : MonoBehaviour
 {
-    private Transform[] riverParts;
-    [SerializeField]
-    private Transform cameraTransform;
+    private Transform[] riverPartsTransforms;
+    [SerializeField] private Transform cameraTransform;
 
     private void Awake()
     {
-        riverParts = GetComponentsInChildren<Transform>();
+        riverPartsTransforms = GetComponentsInChildren<Transform>();
     }
 
     private void Update()
     {
-        foreach (var riverPart in riverParts)
+        foreach (var riverPart in riverPartsTransforms)
         {
             var deltaX = cameraTransform.position.x - riverPart.position.x;
             if (Mathf.Abs(deltaX) >= 11.7)

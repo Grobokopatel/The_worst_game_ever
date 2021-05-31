@@ -11,7 +11,7 @@ public static class Technical
         whatToDoAfterDelay();
     }
 
-    public static Item GetItem(this string itemName)
+    public static Item GetItemWithThisName(this string itemName)
     {
         return Resources.Load<Item>($"Prefabs/Inventory items/{itemName}");
     }

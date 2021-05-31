@@ -26,7 +26,7 @@ public class CraftButton : MonoBehaviour
         }
         else
         {
-            PopUpTextCreator.TextsToPopUp.Enqueue(($"Мне не хватает ресурсов", Color.red));
+            PopUpTextCreator.QueueText($"Мне не хватает ресурсов", Color.red);
         }
     }
 }

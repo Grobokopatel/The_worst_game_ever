@@ -8,36 +8,32 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float speed = 3F;
 
-    private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer sprite;
-    private BoxCollider2D collider;
     public static Player player;
     public readonly static float ConstantYPosition = -6.283F;
     [SerializeField] private GameObject fishingGamePrefab;
     [SerializeField] private GameObject bobber;
     [SerializeField] private GameObject boatPrefab;
     [SerializeField] private GameObject inventoryCanvas;
-    [SerializeField] private GameObject itemPrefab;
+    [SerializeField] private GameObject inventorySlotPrefab;
+    public Interactable CurrentInteractable { get; set; }
 
     public PlayerState State
     {
-        get => (PlayerState) animator.GetInteger("State");
+        get => (PlayerState)animator.GetInteger("State");
         set
         {
             switch (value)
             {
+                case PlayerState.Run:
                 case PlayerState.Idle:
+                    if (!PauseMenu.pauseMenu.IsGamePaused)
+                        enabled = true;
                     sprite.sortingOrder = 5;
-                    enabled = true;
                     var newPosition = player.transform.position;
                     newPosition.y = ConstantYPosition;
                     transform.position = newPosition;
-                    break;
-
-                case PlayerState.Run:
-                    sprite.sortingOrder = 5;
-                    enabled = true;
                     break;
 
                 case PlayerState.InBoat:
@@ -51,17 +47,16 @@ public class Player : MonoBehaviour
                     break;
             }
 
-            animator.SetInteger("State", (int) value);
+            animator.SetInteger("State", (int)value);
         }
     }
 
-    public Interactable CurrentInteractable { get; set; }
 
     private void Awake()
     {
+        AddDeltaItems("Key", 1);
+        AddDeltaItems("Shovel", 1);
         player = this;
-        collider = GetComponent<BoxCollider2D>();
-        rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         StartCoroutine(Technical.WaitThenInvokeMethod(3, () =>
@@ -73,6 +68,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
+        {
             if (player.GetAmountOfItem("FishingRod") >= 1)
             {
                 if (State != PlayerState.InBoat)
@@ -83,30 +79,26 @@ public class Player : MonoBehaviour
             }
             else
             {
-                PopUpTextCreator.TextsToPopUp.Enqueue(($"Мне нечем рыбачить", Color.white));
+                PopUpTextCreator.QueueText($"Мне нечем рыбачить");
             }
+        }
+
 
         if (State == PlayerState.InBoat && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
                                         && Enumerable.Range(0, 3)
-                                            .All(number =>
-                                                Technical.GetCollidersInPosition(transform.position + transform.up +
+                                            .All(number => Technical.GetCollidersInPosition(transform.position + transform.up +
                                                     (0.75F - number * 0.75F) * transform.right).Length >= 1))
         {
-            Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>()
-                .flipX = !sprite.flipX;
+            Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>().flipX = !sprite.flipX;
+
             if (Input.GetButton("Horizontal"))
-            {
-                State = PlayerState.Idle;
                 State = PlayerState.Run;
-            }
             else
                 State = PlayerState.Idle;
-
-            sprite.sortingOrder = 5;
         }
 
-        if (CurrentInteractable != null && Input.GetKeyDown(KeyCode.E))
-            CurrentInteractable.Interact();
+        if (Input.GetKeyDown(KeyCode.E))
+            CurrentInteractable?.Interact();
 
         if (State != PlayerState.InBoat)
         {
@@ -129,11 +121,11 @@ public class Player : MonoBehaviour
     public void Swim()
     {
         Move(false, Input.GetAxis("Horizontal"));
+        Debug.Log(Input.GetAxis("Horizontal"));
     }
 
     public void Walk()
     {
-        State = PlayerState.Run;
         Move(true, Input.GetAxis("Horizontal"));
     }
 
@@ -141,10 +133,6 @@ public class Player : MonoBehaviour
     {
         var deltaMovement = scale * transform.right;
         sprite.flipX = deltaMovement.x < 0;
-
-        /*var colliderOffset = collider.offset;
-        colliderOffset.x = (float)Math.Abs(colliderOffset.x) * (sprite.flipX ? 1 : -1);
-        collider.offset = colliderOffset;*/
 
         var bobberCoords = bobber.transform.localPosition;
         bobberCoords.x = Math.Abs(bobberCoords.x) * (sprite.flipX ? -1 : 1);
@@ -157,14 +145,14 @@ public class Player : MonoBehaviour
                 speed * Time.deltaTime);
     }
 
-    private readonly Dictionary<Item, (int quantity, GameObject itemObject)> inventory =
+    private readonly Dictionary<Item, (int quantity, GameObject itemSlot)> inventory =
         new Dictionary<Item, (int, GameObject)>();
 
     public void AddDeltaItems(Item item, int deltaAmount)
     {
         if (deltaAmount != 0)
-            PopUpTextCreator.TextsToPopUp.Enqueue(($"{(deltaAmount > 0 ? "+" : "")}{deltaAmount} {item.ItemName}",
-                deltaAmount > 0 ? Color.white : Color.red));
+            PopUpTextCreator.QueueText($"{(deltaAmount > 0 ? "+" : "")}{deltaAmount} {item.ItemName}",
+                deltaAmount > 0 ? Color.white : Color.red);
         int newQuantity;
         if (item.ItemName == "Лодка")
         {
@@ -193,28 +181,28 @@ public class Player : MonoBehaviour
 
         if (newQuantity == 0)
         {
-            if (inventory[item].itemObject != null)
-                Destroy(inventory[item].itemObject);
+            if (inventory[item].itemSlot != null)
+                Destroy(inventory[item].itemSlot);
             inventory[item] = (0, null);
             return;
         }
         else
         {
-            if (inventory[item].itemObject == null)
+            if (inventory[item].itemSlot == null)
             {
-                inventory[item] = (newQuantity, Instantiate(itemPrefab, inventoryCanvas.transform));
-                inventory[item].itemObject.GetComponentsInChildren<Image>()[1].sprite = item.Icon;
+                inventory[item] = (newQuantity, Instantiate(inventorySlotPrefab, inventoryCanvas.transform));
+                inventory[item].itemSlot.GetComponentsInChildren<Image>()[1].sprite = item.Icon;
             }
             else
-                inventory[item] = (newQuantity, inventory[item].itemObject);
+                inventory[item] = (newQuantity, inventory[item].itemSlot);
         }
 
-        inventory[item].itemObject.GetComponentInChildren<Text>().text = newQuantity == 1 ? "" : newQuantity.ToString();
+        inventory[item].itemSlot.GetComponentInChildren<Text>().text = newQuantity == 1 ? "" : newQuantity.ToString();
     }
 
     public void AddDeltaItems(string itemName, int deltaAmount)
     {
-        AddDeltaItems(Technical.GetItem(itemName), deltaAmount);
+        AddDeltaItems(itemName.GetItemWithThisName(), deltaAmount);
     }
 
     public int GetAmountOfItem(Item item)
@@ -222,17 +210,12 @@ public class Player : MonoBehaviour
         if (inventory.ContainsKey(item))
             return inventory[item].quantity;
 
-        AddDeltaItems(item, 0);
+        inventory[item] = (0, null);
         return 0;
     }
 
     public int GetAmountOfItem(string itemName)
     {
-        var item = Technical.GetItem(itemName);
-        if (inventory.ContainsKey(item))
-            return inventory[item].quantity;
-
-        AddDeltaItems(item, 0);
-        return 0;
+        return GetAmountOfItem(itemName.GetItemWithThisName());
     }
 }

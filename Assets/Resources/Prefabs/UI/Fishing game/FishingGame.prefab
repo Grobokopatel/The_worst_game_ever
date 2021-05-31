@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03dc4e4989c010b428fbae3eec8f3be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 7293265200039060635}
+  gridForArrows: {fileID: 7293265200039060635}
   arrowPrefab: {fileID: 7399356568212678733, guid: eebcd1b011deaae4787ed3f36d5fd7ea, type: 3}
   leftPartProgressBar: {fileID: 4194431045101029674}
   rightPartProgressBar: {fileID: 6382042572773756224}

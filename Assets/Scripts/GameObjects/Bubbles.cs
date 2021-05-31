@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class CirclesOnWater : MonoBehaviour
+public class Bubbles : MonoBehaviour
 {
     public static bool isCasualDifficultyOn;
     [SerializeField]

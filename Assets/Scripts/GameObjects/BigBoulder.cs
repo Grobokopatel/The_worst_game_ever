@@ -16,7 +16,7 @@ public class BigBoulder : Interactable
         }
         else
         {
-            PopUpTextCreator.TextsToPopUp.Enqueue(("Мне бы чем-нибудь взорвать этот камень", Color.white));
+            PopUpTextCreator.QueueText("Мне бы чем-нибудь взорвать этот камень");
         }
     }
 }

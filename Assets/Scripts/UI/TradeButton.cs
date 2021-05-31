@@ -49,7 +49,7 @@ public class TradeButton : MonoBehaviour
         }
         else
         {
-            PopUpTextCreator.TextsToPopUp.Enqueue(($"Мне не хватает ресурсов для покупки", Color.red));
+            PopUpTextCreator.QueueText($"Мне не хватает ресурсов для покупки", Color.red);
         }
     }
 }
