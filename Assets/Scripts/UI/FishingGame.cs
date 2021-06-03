@@ -34,7 +34,7 @@ public class FishingGame : MonoBehaviour
         var randomNumberGenerator = new System.Random();
 
         if (bubblesThatBobberTouches.MaxArrowAmount == 0)
-            arrowNumber = randomNumberGenerator.Next(12, 20);
+            arrowNumber = randomNumberGenerator.Next(12,20);
         else
             arrowNumber = randomNumberGenerator.Next(bubblesThatBobberTouches.MinArrowAmount, bubblesThatBobberTouches.MaxArrowAmount);
 
@@ -90,12 +90,12 @@ public class FishingGame : MonoBehaviour
     {
         while (!doesGameStarted)
         {
-            if (Input.GetButton("Horizontal") || Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetButtonDown("Horizontal") || Input.GetKeyDown(KeyCode.Escape))
             {
                 Player.player.State = PlayerState.Idle;
                 Destroy(gameObject);
             }
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         if (playersBobber.DoesTouchAnyBubbles())

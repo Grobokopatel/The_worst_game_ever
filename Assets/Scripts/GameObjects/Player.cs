@@ -54,8 +54,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        AddDeltaItems("Key", 1);
-        AddDeltaItems("Shovel", 1);
         player = this;
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -121,7 +119,6 @@ public class Player : MonoBehaviour
     public void Swim()
     {
         Move(false, Input.GetAxis("Horizontal"));
-        Debug.Log(Input.GetAxis("Horizontal"));
     }
 
     public void Walk()

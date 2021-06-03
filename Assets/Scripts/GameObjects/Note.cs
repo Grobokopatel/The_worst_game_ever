@@ -26,7 +26,7 @@ public class Note : Interactable
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
         {
             enabled = false;
             noteText.SetActive(false);

@@ -9,7 +9,7 @@ public class ExchangeMenu : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
         {
             gameObject.SetActive(false);
             Player.player.enabled = true;

@@ -5,7 +5,7 @@ public class Hatch : Interactable
 {
     public bool isDugOut;
     private float currentReload = 0;
-    private readonly float reload = 4;
+    private readonly float reload = 6;
     [SerializeField] private GameObject autro;
     private string[] phrases = {
         "я думал будет смешнее",
@@ -49,6 +49,11 @@ public class Hatch : Interactable
         if (Input.GetKeyDown(KeyCode.G))
             if (Player.player.GetAmountOfItem("Shovel") >= 1)
             {
+                if (Player.player.State == PlayerState.InBoat)
+                {
+                    PopUpTextCreator.QueueText($"¬оду довольно проблематично копать");
+                }
+                else
                 if (currentReload <= 0)
                 {
                     AudioManager.PlayAudio(AudioManager.DigSound);
@@ -72,7 +77,10 @@ public class Hatch : Interactable
             }
             else
             {
-                PopUpTextCreator.QueueText($"ћне нечем копать");
+                if (Player.player.State == PlayerState.InBoat)
+                    PopUpTextCreator.QueueText($"ћне нечем копать, да и в воде довольно проблематично что-то откопать");
+                else
+                    PopUpTextCreator.QueueText($"ћне нечем копать");
             }
     }
 }
