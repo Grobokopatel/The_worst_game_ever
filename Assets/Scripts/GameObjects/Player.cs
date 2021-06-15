@@ -8,10 +8,22 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float speed = 3F;
 
+    public float currentReload
+    {
+        get;
+        set;
+    }
+    private readonly float reload = 6;
     private Animator animator;
     private SpriteRenderer sprite;
     public static Player player;
     public readonly static float ConstantYPosition = -6.283F;
+    public Boat Boat
+    {
+        get;
+        set;
+    }
+
     [SerializeField] private GameObject fishingGamePrefab;
     [SerializeField] private GameObject bobber;
     [SerializeField] private GameObject boatPrefab;
@@ -54,6 +66,13 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        AddDeltaItems("Key");
+        AddDeltaItems("Dynamite");
+        AddDeltaItems("Shovel");
+        AddDeltaItems("Axe");
+        AddDeltaItems("Log", 3);
+        AddDeltaItems("Pickaxe");
+
         player = this;
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -80,19 +99,69 @@ public class Player : MonoBehaviour
                 PopUpTextCreator.QueueText($"Мне нечем рыбачить");
             }
         }
-
-
-        if (State == PlayerState.InBoat && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-                                        && Enumerable.Range(0, 3)
-                                            .All(number => Technical.GetCollidersInPosition(transform.position + transform.up +
-                                                    (0.75F - number * 0.75F) * transform.right).Length >= 1))
+        else if (Input.GetKeyDown(KeyCode.G))
         {
-            Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>().flipX = !sprite.flipX;
+            if (GetAmountOfItem("Shovel") >= 1)
+            {
+                if (State == PlayerState.InBoat)
+                {
+                    PopUpTextCreator.QueueText($"Воду довольно проблематично копать");
+                }
+                else
+                if (currentReload <= 0)
+                {
+                    AudioManager.PlayAudio(AudioManager.DigSound);
+                    var closestDiggable =
+                        Technical.GetCollidersInPosition(transform.position)
+                        .Select(collider => collider.GetComponent<Diggable>())
+                        .FirstOrDefault(diggable => diggable != null);
 
-            if (Input.GetButton("Horizontal"))
-                State = PlayerState.Run;
+                    if (closestDiggable != null)
+                    {
+                        closestDiggable.TryDig();
+                        PopUpTextCreator.QueueText($"Так, я что-то нашёл");
+                    }
+                    else
+                    {
+                        PopUpTextCreator.QueueText($"Я ничего не откопал");
+                        currentReload = reload;
+                    }
+                }
+                else
+                {
+                    PopUpTextCreator.QueueText($"Я устал, мне бы передохнуть ещё секунды {Mathf.CeilToInt(currentReload)}");
+                }
+            }
             else
-                State = PlayerState.Idle;
+            {
+                if (State == PlayerState.InBoat)
+                    PopUpTextCreator.QueueText($"Мне нечем копать, да и в воде довольно проблематично что-то откопать");
+                else
+                    PopUpTextCreator.QueueText($"Мне нечем копать");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            if (State == PlayerState.InBoat)
+            {
+                if (Enumerable.Range(0, 3)
+                    .All(number => Technical.GetCollidersInPosition(transform.position + transform.up + (0.75F - number * 0.75F) * transform.right).Length >= 1))
+                {
+                    Instantiate(boatPrefab, transform.position, transform.rotation).GetComponentInChildren<SpriteRenderer>().flipX = !sprite.flipX;
+
+                    if (Input.GetButton("Horizontal"))
+                        State = PlayerState.Run;
+                    else
+                        State = PlayerState.Idle;
+                }
+            }
+            else if (Boat != null)
+            {
+                State = PlayerState.InBoat;
+                transform.position = Boat.transform.position;
+                Destroy(Boat.gameObject);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -145,7 +214,7 @@ public class Player : MonoBehaviour
     private readonly Dictionary<Item, (int quantity, GameObject itemSlot)> inventory =
         new Dictionary<Item, (int, GameObject)>();
 
-    public void AddDeltaItems(Item item, int deltaAmount)
+    public void AddDeltaItems(Item item, int deltaAmount = 1)
     {
         if (deltaAmount != 0)
             PopUpTextCreator.QueueText($"{(deltaAmount > 0 ? "+" : "")}{deltaAmount} {item.ItemName}",
@@ -197,7 +266,7 @@ public class Player : MonoBehaviour
         inventory[item].itemSlot.GetComponentInChildren<Text>().text = newQuantity == 1 ? "" : newQuantity.ToString();
     }
 
-    public void AddDeltaItems(string itemName, int deltaAmount)
+    public void AddDeltaItems(string itemName, int deltaAmount = 1)
     {
         AddDeltaItems(itemName.GetItemWithThisName(), deltaAmount);
     }

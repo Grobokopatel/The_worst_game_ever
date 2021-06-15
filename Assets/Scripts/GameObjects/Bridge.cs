@@ -53,6 +53,7 @@ public class Bridge : Interactable
             Player.player.AddDeltaItems("Log", -3);
 
             materials.SetActive(false);
+            Player.player.CurrentInteractable = null;
             Sprite.color = new Color(255, 255, 255, 1);
             defaultColor = new Color(255, 255, 255, 1);
             enabled = false;

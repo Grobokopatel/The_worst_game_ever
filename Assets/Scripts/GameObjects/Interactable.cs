@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
     protected Color defaultColor = Color.white;
-    protected Color highlightedColor = Color.yellow;
+    protected Color highlightedColor = new Color(0.48F, 0.84F, 0);
     public SpriteRenderer Sprite
     {
         get;

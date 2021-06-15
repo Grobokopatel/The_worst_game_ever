@@ -8,12 +8,12 @@ public class Credits : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Technical.WaitThenInvokeMethod(40, () => Destroy(gameObject)));
+        StartCoroutine(Technical.WaitThenInvokeMethod(70, () => Destroy(gameObject)));
     }
 
 
     void Update()
     {
-        textTransform.Translate(Time.deltaTime * transform.up * 146);
+        textTransform.Translate(Time.deltaTime * transform.up * 90);
     }
 }

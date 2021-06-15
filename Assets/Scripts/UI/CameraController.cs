@@ -48,6 +48,8 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (Player.player.currentReload > 0)
+            Player.player.currentReload -= Time.deltaTime;
         var offsetVector = new Vector3(xOffset, 0, zOffset);
         var offsettedTarget = target.position + offsetVector;
         offsettedTarget.y = yCoord;

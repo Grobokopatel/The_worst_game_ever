@@ -16,7 +16,7 @@ MonoBehaviour:
   shouldNotLoadDuringInitialization: 0
   Materials:
   - item: {fileID: 11400000, guid: 4a8818b14528b34459df7127d89d5441, type: 2}
-    amount: 5
+    amount: 9
   Results:
   - item: {fileID: 11400000, guid: 3de0751698176e845859dde4b3f254f9, type: 2}
     amount: 1

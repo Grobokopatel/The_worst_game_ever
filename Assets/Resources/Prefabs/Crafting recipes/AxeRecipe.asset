@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d83f6493af2f534588e485a26d3839a, type: 3}
+  m_Script: {fileID: 11500000, guid: b4b4cc10be3a6cf45a362c7aab3844c9, type: 3}
   m_Name: AxeRecipe
   m_EditorClassIdentifier: 
-  sortOrder: 2
+  sortOrder: 0
   shouldNotLoadDuringInitialization: 0
   Materials:
   - item: {fileID: 11400000, guid: 61429b1151d16dd44aae8da1aaf22455, type: 2}
     amount: 3
-  - item: {fileID: 11400000, guid: b7d26f266a2d6df4c9b5961cba74b001, type: 2}
-    amount: 1
   Results:
   - item: {fileID: 11400000, guid: 3378b5520aeff18428e3d12efd4ee039, type: 2}
     amount: 1
